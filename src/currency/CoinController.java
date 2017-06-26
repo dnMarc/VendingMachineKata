@@ -39,9 +39,9 @@ public class CoinController {
     }
     
     private boolean coinIsADime(Coin currentCoin) {
-        if ((currentCoin.getWeightInGrams() == 2.268) &&
-            (currentCoin.getDiameterInMM()  == 17.91) &&
-            (currentCoin.getThicknessInMM() == 1.35)){
+        if ((currentCoin.getWeightInGrams() == DIME_WEIGHT_IN_GRAMS) &&
+            (currentCoin.getDiameterInMM()  == DIME_DIAMETER_IN_MM) &&
+            (currentCoin.getThicknessInMM() == DIME_THICKNESS_IN_MM)){
             
             return true;
         }
