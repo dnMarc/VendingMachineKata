@@ -22,9 +22,9 @@ public class CoinController {
     }
 
     private boolean coinIsANickel(Coin currentCoin) {
-        if ((currentCoin.weightInGrams == 5.000) &&
-            (currentCoin.diameterInMM  == 21.21) &&
-            (currentCoin.thicknessInMM == 1.95)){
+        if ((currentCoin.getWeightInGrams() == 5.000) &&
+            (currentCoin.getDiameterInMM()  == 21.21) &&
+            (currentCoin.getThicknessInMM() == 1.95)){
             
             return true;
         }

@@ -9,13 +9,25 @@ public enum Coin {
     
     DIME(0.0, 0.0, 0.0);
     
-    public double weightInGrams;
-    public double diameterInMM;
-    public double thicknessInMM;
+    private final double weightInGrams;
+    private final double diameterInMM;
+    private final double thicknessInMM;
     
     Coin(double weight, double diameter, double thickness){
         this.weightInGrams = weight;
         this.diameterInMM = diameter;
         this.thicknessInMM = thickness;
+    }
+    
+    public double getWeightInGrams(){
+        return weightInGrams;
+    }
+    
+    public double getDiameterInMM(){
+        return diameterInMM;
+    }
+    
+    public double getThicknessInMM(){
+        return thicknessInMM;
     }
 }
