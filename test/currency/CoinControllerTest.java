@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.List;
+
 import static currency.Coin.*;
 
 public class CoinControllerTest {
@@ -61,6 +63,12 @@ public class CoinControllerTest {
         coinController.insert(QUARTER, QUARTER, QUARTER, QUARTER, DIME, NICKEL, DIME);
         int systemBalanceInCents = coinController.getSystemBalanceInCents();
         assertEquals(125, systemBalanceInCents);
+    }
+    
+    @Test
+    public void noReturnedCoinsWhenNoCoinsInserted(){
+        List<Coin> returnedCoins = coinController.getCoinsToDispense();
+        assertTrue(returnedCoins.isEmpty());
     }
 
 }

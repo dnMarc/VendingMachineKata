@@ -1,7 +1,10 @@
 package currency;
 
+import java.util.List;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
+
 
 import static currency.Coin.*;
 
@@ -54,6 +57,10 @@ public class CoinController {
             return true;
             }
         return false;
+    }
+
+    public List<Coin> getCoinsToDispense() {
+        return new ArrayList<Coin>();
     }
 
  
