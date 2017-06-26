@@ -2,6 +2,7 @@ package currency;
 
 public class CoinController {
     
+    private static final int NICKEL_VALUE_IN_CENTS = 5;
     private int systemBalanceInCents = 0;
 
     public int getSystemBalanceInCents() {
@@ -9,7 +10,7 @@ public class CoinController {
     }
 
     public void insert(Coin insertedCoin) {
-        systemBalanceInCents = 5;
+        systemBalanceInCents = NICKEL_VALUE_IN_CENTS;
     }
 
 }
