@@ -11,5 +11,12 @@ public class VendingMachineTest {
         String displayStatus = vendingMachine.createSystemDisplay(0);
         assertEquals("INSERT COIN", displayStatus);
     }
+    
+    @Test
+    public void displaySystemBalanceLessThanTenCents(){
+        VendingMachine vendingMachine = new VendingMachine();
+        String displayStatus = vendingMachine.createSystemDisplay(5);
+        assertEquals("$0.05", displayStatus);
+    }
 
 }
