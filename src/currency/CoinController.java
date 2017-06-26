@@ -6,6 +6,7 @@ public class CoinController {
     
     private static final int NICKEL_VALUE_IN_CENTS = 5;
     private static final int DIME_VALUE_IN_CENTS = 10;
+    private static final int QUARTER_VALUE_IN_CENTS = 25;
     private int systemBalanceInCents = 0;
 
     public int getSystemBalanceInCents() {
@@ -21,7 +22,7 @@ public class CoinController {
                 systemBalanceInCents += DIME_VALUE_IN_CENTS;
             }
             else{
-                systemBalanceInCents += 25;
+                systemBalanceInCents += QUARTER_VALUE_IN_CENTS;
             }
         }
     }
