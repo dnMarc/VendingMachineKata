@@ -55,5 +55,12 @@ public class CoinControllerTest {
         int systemBalanceInCents = coinController.getSystemBalanceInCents();
         assertEquals(0, systemBalanceInCents);
     }
+    
+    @Test
+    public void systemValueCanReachValueOverNinetyNineCents(){
+        coinController.insert(QUARTER, QUARTER, QUARTER, QUARTER, DIME, NICKEL, DIME);
+        int systemBalanceInCents = coinController.getSystemBalanceInCents();
+        assertEquals(125, systemBalanceInCents);
+    }
 
 }
