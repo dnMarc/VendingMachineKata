@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.List;
+
 public class VendingMachineTest {
     
     private VendingMachine vendingMachine;
@@ -13,6 +15,8 @@ public class VendingMachineTest {
         vendingMachine = new VendingMachine();
     }
 
+    //BEGIN Accept Coins Functionality Tests
+    
     @Test
     public void displayInsertCoinWithZeroSystemValue() {
         String displayStatus = vendingMachine.createSystemDisplay(0);
@@ -35,6 +39,16 @@ public class VendingMachineTest {
     public void displaySystemBalanceGreaterThanNinetyNineCents(){
         String displayStatus = vendingMachine.createSystemDisplay(127);
         assertEquals("$1.27", displayStatus);
+    }
+    
+    //END Accept Coins Functionality Tests
+    
+    //BEGIN Select Product Functionality Tests
+   
+    @Test
+    public void productReturnEmptyWithNoPurchaseAttempt(){
+        List<Product> returnedProducts = vendingMachine.checkProductReturn();
+        assertTrue(returnedProducts.isEmpty());
     }
 
 }
