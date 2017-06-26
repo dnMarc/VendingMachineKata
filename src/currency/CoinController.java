@@ -10,7 +10,7 @@ public class CoinController {
     }
 
     public void insert(Coin insertedCoin) {
-        systemBalanceInCents = NICKEL_VALUE_IN_CENTS;
+        systemBalanceInCents += NICKEL_VALUE_IN_CENTS;
     }
 
 }
