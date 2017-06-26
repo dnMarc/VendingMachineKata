@@ -85,5 +85,13 @@ public class CoinControllerTest {
         assertEquals(1, returnedCoins.size());
         assertEquals(PENNY, returnedCoins.get(0));
     }
+    
+    @Test
+    public void coinsInCoinReturnCanOnlyBeCollectedOnce(){
+        coinController.insert(PENNY);
+        coinController.getCoinsToDispense();
+        List<Coin> returnedCoins = coinController.getCoinsToDispense();
+        assertTrue(returnedCoins.isEmpty());
+    }
 
 }

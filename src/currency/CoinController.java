@@ -67,7 +67,9 @@ public class CoinController {
     }
 
     public List<Coin> getCoinsToDispense() {
-        return coinsWaitingToBeReturned;
+        List<Coin> returnedCoins = new ArrayList<Coin>(coinsWaitingToBeReturned);
+        coinsWaitingToBeReturned.clear();
+        return returnedCoins;
     }
 
  
