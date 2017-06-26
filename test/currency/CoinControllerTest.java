@@ -70,5 +70,12 @@ public class CoinControllerTest {
         List<Coin> returnedCoins = coinController.getCoinsToDispense();
         assertTrue(returnedCoins.isEmpty());
     }
+    
+    @Test
+    public void noReturnedCoinsWhenOnlyValidCoinsInserted(){
+        coinController.insert(QUARTER, NICKEL, DIME, NICKEL);
+        List<Coin> returnedCoins = coinController.getCoinsToDispense();
+        assertTrue(returnedCoins.isEmpty());
+    }
 
 }
