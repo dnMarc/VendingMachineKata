@@ -1,6 +1,10 @@
 package vending;
 
+import currency.CoinController;
+
 public class VendingMachine {
+    
+    private CoinController coinManager = new CoinController();
 
     public String createSystemDisplay(int systemBalanceInCents) {
         if (systemBalanceInCents > 0){
@@ -14,6 +18,10 @@ public class VendingMachine {
         int numCents    = systemBalanceInCents % 100;
         return "$" + Integer.toString(numDollars) + "." +
                 String.format("%02d", numCents);
+    }
+
+    public String checkDisplay() {
+        return createSystemDisplay(coinManager.getSystemBalanceInCents());
     }
 
 }
