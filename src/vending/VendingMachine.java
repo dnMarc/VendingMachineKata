@@ -39,8 +39,8 @@ public class VendingMachine {
         return coinManager.getCoinsToDispense();
     }
 
-    public void attemptProductPurchase(Product cola, int systemBalanceInCents) {
-        productsToDispense.add(COLA);
+    public void attemptProductPurchase(Product selectedProduct, int systemBalanceInCents) {
+        productsToDispense.add(selectedProduct);
     }
     
     public List<Product> checkProductReturn() {

@@ -1,5 +1,6 @@
 package vending;
 
 public enum Product {
-    COLA
+    COLA,
+    CHIPS
 }

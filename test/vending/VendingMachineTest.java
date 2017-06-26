@@ -61,5 +61,13 @@ public class VendingMachineTest {
         assertEquals(1, dispensedProducts.size());
         assertEquals(COLA, dispensedProducts.get(0));
     }
+    
+    @Test
+    public void productReturnContainsChipsAfterChipsPurchase(){
+        vendingMachine.attemptProductPurchase(CHIPS, SUFFICIENT_VALUE_FOR_ANY_PURCHASE);
+        List<Product> dispensedProducts = vendingMachine.checkProductReturn();
+        assertEquals(1, dispensedProducts.size());
+        assertEquals(CHIPS, dispensedProducts.get(0));
+    }
 
 }
