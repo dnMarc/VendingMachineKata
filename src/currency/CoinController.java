@@ -30,16 +30,18 @@ public class CoinController {
 
     public void insert(Coin ... insertedCoins) {
         for (Coin currentCoin : insertedCoins){
-            if (coinIsType(currentCoin, NICKEL)){
-                systemBalanceInCents += NICKEL_VALUE_IN_CENTS;
-            }
-            else if (coinIsType(currentCoin, DIME)){
-                systemBalanceInCents += DIME_VALUE_IN_CENTS;
-            }
-            else{
-                systemBalanceInCents += QUARTER_VALUE_IN_CENTS;
+            Coin determinedCoinType = determineCoinType(currentCoin);
+            systemBalanceInCents += coinValuesInCents.get(determinedCoinType);
+        }
+    }
+    
+    private Coin determineCoinType(Coin coinToCheck){
+        for (Coin currentCoinType : Coin.values()){
+            if (coinIsType(coinToCheck, currentCoinType)){
+                return currentCoinType;
             }
         }
+        return QUARTER;
     }
     
     private boolean coinIsType(Coin coinToCheck, Coin referenceCoinType){
