@@ -9,7 +9,9 @@ public enum Coin {
     
     NICKEL(NICKEL_WEIGHT_IN_GRAMS, NICKEL_DIAMETER_IN_MM, NICKEL_THICKNESS_IN_MM),
     
-    DIME(0.0, 0.0, 0.0);
+    DIME(2.268, 17.91, 1.35),
+    
+    QUARTER(0.0, 0.0, 0.0);
     
     private final double weightInGrams;
     private final double diameterInMM;

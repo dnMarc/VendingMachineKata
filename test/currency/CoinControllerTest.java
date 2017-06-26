@@ -41,5 +41,12 @@ public class CoinControllerTest {
         int systemBalanceInCents = coinController.getSystemBalanceInCents();
         assertEquals(10, systemBalanceInCents);
     }
+    
+    @Test
+    public void systemValueIsTwentyFiveCentsAfterOneQuarterInserted(){
+        coinController.insert(QUARTER);
+        int systemBalanceInCents = coinController.getSystemBalanceInCents();
+        assertEquals(25, systemBalanceInCents);
+    }
 
 }

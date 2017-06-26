@@ -17,16 +17,30 @@ public class CoinController {
             if (coinIsANickel(currentCoin)){
                 systemBalanceInCents += NICKEL_VALUE_IN_CENTS;
             }
-            else{
+            else if (coinIsADime(currentCoin)){
                 systemBalanceInCents += DIME_VALUE_IN_CENTS;
+            }
+            else{
+                systemBalanceInCents += 25;
             }
         }
     }
+
 
     private boolean coinIsANickel(Coin currentCoin) {
         if ((currentCoin.getWeightInGrams() == NICKEL_WEIGHT_IN_GRAMS) &&
             (currentCoin.getDiameterInMM()  == NICKEL_DIAMETER_IN_MM) &&
             (currentCoin.getThicknessInMM() == NICKEL_THICKNESS_IN_MM)){
+            
+            return true;
+        }
+        return false;
+    }
+    
+    private boolean coinIsADime(Coin currentCoin) {
+        if ((currentCoin.getWeightInGrams() == 2.268) &&
+            (currentCoin.getDiameterInMM()  == 17.91) &&
+            (currentCoin.getThicknessInMM() == 1.35)){
             
             return true;
         }
