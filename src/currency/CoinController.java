@@ -22,6 +22,7 @@ public class CoinController {
         coinValuesInCents.put(NICKEL, NICKEL_VALUE_IN_CENTS);
         coinValuesInCents.put(DIME, DIME_VALUE_IN_CENTS);
         coinValuesInCents.put(QUARTER, QUARTER_VALUE_IN_CENTS);
+        coinValuesInCents.put(PENNY, 0);
     }
     
     public int getSystemBalanceInCents() {

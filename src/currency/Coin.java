@@ -11,7 +11,9 @@ public enum Coin {
     
     DIME(   DIME_WEIGHT_IN_GRAMS,   DIME_DIAMETER_IN_MM,    DIME_THICKNESS_IN_MM),
     
-    QUARTER(0.0, 0.0, 0.0);
+    QUARTER(5.670, 24.26, 1.75),
+    
+    PENNY(0.0, 0.0, 0.0);
     
     private final double weightInGrams;
     private final double diameterInMM;

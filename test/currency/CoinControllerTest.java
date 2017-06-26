@@ -48,5 +48,12 @@ public class CoinControllerTest {
         int systemBalanceInCents = coinController.getSystemBalanceInCents();
         assertEquals(25, systemBalanceInCents);
     }
+    
+    @Test
+    public void systemValueIsZeroAfterOnePennyInserted(){
+        coinController.insert(PENNY);
+        int systemBalanceInCents = coinController.getSystemBalanceInCents();
+        assertEquals(0, systemBalanceInCents);
+    }
 
 }
