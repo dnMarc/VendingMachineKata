@@ -30,5 +30,12 @@ public class IntegrationTests {
         String displayStatus = vendingMachine.checkDisplay();
         assertEquals("$0.35", displayStatus);
     }
+    
+    @Test
+    public void systemDisplaysCurrentBalanceGreaterThanNinetyNineCents(){
+        vendingMachine.insert(QUARTER, QUARTER, DIME, NICKEL, QUARTER, QUARTER, NICKEL);
+        String displayStatus = vendingMachine.checkDisplay();
+        assertEquals("$1.20", displayStatus);
+    }
 
 }
