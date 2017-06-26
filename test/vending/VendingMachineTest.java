@@ -30,5 +30,11 @@ public class VendingMachineTest {
         String displayStatus = vendingMachine.createSystemDisplay(15);
         assertEquals("$0.15", displayStatus);
     }
+    
+    @Test
+    public void displaySystemBalanceGreaterThanNinetyNineCents(){
+        String displayStatus = vendingMachine.createSystemDisplay(127);
+        assertEquals("$1.27", displayStatus);
+    }
 
 }
