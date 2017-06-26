@@ -3,6 +3,7 @@ package currency;
 public class CoinController {
     
     private static final int NICKEL_VALUE_IN_CENTS = 5;
+    private static final int DIME_VALUE_IN_CENTS = 10;
     private int systemBalanceInCents = 0;
 
     public int getSystemBalanceInCents() {
@@ -18,7 +19,7 @@ public class CoinController {
                 systemBalanceInCents += NICKEL_VALUE_IN_CENTS;
             }
             else{
-                systemBalanceInCents += 10;
+                systemBalanceInCents += DIME_VALUE_IN_CENTS;
             }
         }
     }
