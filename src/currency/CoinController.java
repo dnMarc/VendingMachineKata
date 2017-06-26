@@ -3,7 +3,6 @@ package currency;
 import java.util.Map;
 import java.util.HashMap;
 
-import static currency.CoinDimensions.*;
 import static currency.Coin.*;
 
 public class CoinController {
@@ -31,10 +30,10 @@ public class CoinController {
 
     public void insert(Coin ... insertedCoins) {
         for (Coin currentCoin : insertedCoins){
-            if (coinIsANickel(currentCoin)){
+            if (coinIsType(currentCoin, NICKEL)){
                 systemBalanceInCents += NICKEL_VALUE_IN_CENTS;
             }
-            else if (coinIsADime(currentCoin)){
+            else if (coinIsType(currentCoin, DIME)){
                 systemBalanceInCents += DIME_VALUE_IN_CENTS;
             }
             else{
@@ -42,27 +41,18 @@ public class CoinController {
             }
         }
     }
-
-
-    private boolean coinIsANickel(Coin currentCoin) {
-        if ((currentCoin.getWeightInGrams() == NICKEL_WEIGHT_IN_GRAMS) &&
-            (currentCoin.getDiameterInMM()  == NICKEL_DIAMETER_IN_MM) &&
-            (currentCoin.getThicknessInMM() == NICKEL_THICKNESS_IN_MM)){
-            
-            return true;
-        }
-        return false;
-    }
     
-    private boolean coinIsADime(Coin currentCoin) {
-        if ((currentCoin.getWeightInGrams() == DIME_WEIGHT_IN_GRAMS) &&
-            (currentCoin.getDiameterInMM()  == DIME_DIAMETER_IN_MM) &&
-            (currentCoin.getThicknessInMM() == DIME_THICKNESS_IN_MM)){
+    private boolean coinIsType(Coin coinToCheck, Coin referenceCoinType){
+        if ((coinToCheck.getWeightInGrams() == referenceCoinType.getWeightInGrams()) &&
+            (coinToCheck.getDiameterInMM()  == referenceCoinType.getDiameterInMM()) &&
+            (coinToCheck.getThicknessInMM() == referenceCoinType.getThicknessInMM())){
             
             return true;
-        }
+            }
         return false;
     }
+
+ 
 
     
     
