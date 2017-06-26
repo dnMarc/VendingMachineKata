@@ -9,6 +9,7 @@ import java.util.List;
 import vending.VendingMachine;
 import currency.Coin;
 import static currency.Coin.*;
+import static currency.CoinControllerTest.*;
 
 public class IntegrationTests {
     
@@ -58,8 +59,7 @@ public class IntegrationTests {
     public void coinReturnContainsPennyWhenPennyInserted(){
         vendingMachine.insert(QUARTER, PENNY, NICKEL, DIME);
         List<Coin> returnedCoins = vendingMachine.checkCoinReturn();
-        assertEquals(1, returnedCoins.size());
-        assertEquals(PENNY, returnedCoins.get(0));
+        assertTrue(coinReturnedIsAsExpected(returnedCoins, PENNY));
     }
 
 }

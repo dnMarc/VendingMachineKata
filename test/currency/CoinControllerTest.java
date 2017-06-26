@@ -82,8 +82,7 @@ public class CoinControllerTest {
     public void pennyReturnedtoCoinReturnWhenInserted(){
         coinController.insert(PENNY);
         List<Coin> returnedCoins = coinController.getCoinsToDispense();
-        assertEquals(1, returnedCoins.size());
-        assertEquals(PENNY, returnedCoins.get(0));
+        assertTrue(coinReturnedIsAsExpected(returnedCoins, PENNY));
     }
     
     @Test
@@ -92,6 +91,17 @@ public class CoinControllerTest {
         coinController.getCoinsToDispense();
         List<Coin> returnedCoins = coinController.getCoinsToDispense();
         assertTrue(returnedCoins.isEmpty());
+    }
+    
+    
+    
+    public static boolean coinReturnedIsAsExpected(List<Coin> returnedCoin, Coin expectedCoinType){
+        if (returnedCoin.size() == 1){
+            if (returnedCoin.get(0) == expectedCoinType){
+                return true;
+            }
+        }
+        return false;
     }
 
 }
