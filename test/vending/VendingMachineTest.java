@@ -10,6 +10,7 @@ import static vending.Product.*;
 
 public class VendingMachineTest {
     
+    private static final int SUFFICIENT_VALUE_FOR_ANY_PURCHASE = 100;
     private VendingMachine vendingMachine;
     
     @Before
@@ -55,7 +56,7 @@ public class VendingMachineTest {
     
     @Test
     public void productReturnContainsColaAfterColaPurchase(){
-        vendingMachine.attemptProductPurchase(COLA, 100);
+        vendingMachine.attemptProductPurchase(COLA, SUFFICIENT_VALUE_FOR_ANY_PURCHASE);
         List<Product> dispensedProducts = vendingMachine.checkProductReturn();
         assertEquals(1, dispensedProducts.size());
         assertEquals(COLA, dispensedProducts.get(0));
