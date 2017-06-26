@@ -10,11 +10,13 @@ import static currency.Coin.*;
 
 public class CoinController {
     
-    private static final int PENNY_VALUE_IN_CENTS = 0;
-    private static final int NICKEL_VALUE_IN_CENTS = 5;
-    private static final int DIME_VALUE_IN_CENTS = 10;
+    private static final int PENNY_VALUE_IN_CENTS   = 0;
+    private static final int NICKEL_VALUE_IN_CENTS  = 5;
+    private static final int DIME_VALUE_IN_CENTS    = 10;
     private static final int QUARTER_VALUE_IN_CENTS = 25;
     private int systemBalanceInCents = 0;
+    
+    private List<Coin> coinsWaitingToBeReturned  = new ArrayList<Coin>();
     
     private Map<Coin, Integer> coinValuesInCents = new HashMap<Coin, Integer>();
 
@@ -36,7 +38,12 @@ public class CoinController {
     public void insert(Coin ... insertedCoins) {
         for (Coin currentCoin : insertedCoins){
             Coin determinedCoinType = determineCoinType(currentCoin);
-            systemBalanceInCents += coinValuesInCents.get(determinedCoinType);
+            if (determinedCoinType != PENNY){
+                systemBalanceInCents += coinValuesInCents.get(determinedCoinType);
+            }
+            else{
+                coinsWaitingToBeReturned.add(currentCoin);
+            }
         }
     }
     
@@ -60,7 +67,7 @@ public class CoinController {
     }
 
     public List<Coin> getCoinsToDispense() {
-        return new ArrayList<Coin>();
+        return coinsWaitingToBeReturned;
     }
 
  

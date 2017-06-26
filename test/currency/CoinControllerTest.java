@@ -77,5 +77,13 @@ public class CoinControllerTest {
         List<Coin> returnedCoins = coinController.getCoinsToDispense();
         assertTrue(returnedCoins.isEmpty());
     }
+    
+    @Test
+    public void pennyReturnedtoCoinReturnWhenInserted(){
+        coinController.insert(PENNY);
+        List<Coin> returnedCoins = coinController.getCoinsToDispense();
+        assertEquals(1, returnedCoins.size());
+        assertEquals(PENNY, returnedCoins.get(0));
+    }
 
 }
