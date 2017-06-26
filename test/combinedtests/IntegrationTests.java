@@ -46,5 +46,12 @@ public class IntegrationTests {
         List<Coin> returnedCoins = vendingMachine.checkCoinReturn();
         assertTrue(returnedCoins.isEmpty());
     }
+    
+    @Test
+    public void coinReturnEmptyWhenOnlyValidCoinsInserted(){
+        vendingMachine.insert(QUARTER, DIME, NICKEL, DIME, NICKEL);
+        List<Coin> returnedCoins = vendingMachine.checkCoinReturn();
+        assertTrue(returnedCoins.isEmpty());
+    }
 
 }
