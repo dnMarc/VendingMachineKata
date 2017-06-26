@@ -53,5 +53,13 @@ public class IntegrationTests {
         List<Coin> returnedCoins = vendingMachine.checkCoinReturn();
         assertTrue(returnedCoins.isEmpty());
     }
+    
+    @Test
+    public void coinReturnContainsPennyWhenPennyInserted(){
+        vendingMachine.insert(QUARTER, PENNY, NICKEL, DIME);
+        List<Coin> returnedCoins = vendingMachine.checkCoinReturn();
+        assertEquals(1, returnedCoins.size());
+        assertEquals(PENNY, returnedCoins.get(0));
+    }
 
 }
