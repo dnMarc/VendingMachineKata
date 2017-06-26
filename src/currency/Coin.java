@@ -1,11 +1,13 @@
 package currency;
 
+import static currency.CoinDimensions.*;
+
 //all valid Coin type values were obtained from 
 //https://www.usmint.gov/learn/coin-and-medal-programs/coin-specifications
 
 public enum Coin {
     
-    NICKEL(5.000, 21.21, 1.95),
+    NICKEL(NICKEL_WEIGHT_IN_GRAMS, NICKEL_DIAMETER_IN_MM, NICKEL_THICKNESS_IN_MM),
     
     DIME(0.0, 0.0, 0.0);
     

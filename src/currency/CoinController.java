@@ -1,5 +1,7 @@
 package currency;
 
+import static currency.CoinDimensions.*;
+
 public class CoinController {
     
     private static final int NICKEL_VALUE_IN_CENTS = 5;
@@ -22,9 +24,9 @@ public class CoinController {
     }
 
     private boolean coinIsANickel(Coin currentCoin) {
-        if ((currentCoin.getWeightInGrams() == 5.000) &&
-            (currentCoin.getDiameterInMM()  == 21.21) &&
-            (currentCoin.getThicknessInMM() == 1.95)){
+        if ((currentCoin.getWeightInGrams() == NICKEL_WEIGHT_IN_GRAMS) &&
+            (currentCoin.getDiameterInMM()  == NICKEL_DIAMETER_IN_MM) &&
+            (currentCoin.getThicknessInMM() == NICKEL_THICKNESS_IN_MM)){
             
             return true;
         }
