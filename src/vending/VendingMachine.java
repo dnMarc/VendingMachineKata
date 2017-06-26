@@ -1,5 +1,8 @@
 package vending;
 
+import java.util.List;
+import java.util.ArrayList;
+
 import currency.Coin;
 import currency.CoinController;
 
@@ -27,6 +30,10 @@ public class VendingMachine {
 
     public void insert(Coin ... insertedCoins) {
         coinManager.insert(insertedCoins);
+    }
+
+    public List<Coin> checkCoinReturn() {
+        return new ArrayList<Coin>();
     }
 
 }

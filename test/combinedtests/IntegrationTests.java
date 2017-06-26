@@ -4,7 +4,10 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.List;
+
 import vending.VendingMachine;
+import currency.Coin;
 import static currency.Coin.*;
 
 public class IntegrationTests {
@@ -36,6 +39,12 @@ public class IntegrationTests {
         vendingMachine.insert(QUARTER, QUARTER, DIME, NICKEL, QUARTER, QUARTER, NICKEL);
         String displayStatus = vendingMachine.checkDisplay();
         assertEquals("$1.20", displayStatus);
+    }
+    
+    @Test
+    public void coinReturnEmptyWhenNoCoinsInserted(){
+        List<Coin> returnedCoins = vendingMachine.checkCoinReturn();
+        assertTrue(returnedCoins.isEmpty());
     }
 
 }
