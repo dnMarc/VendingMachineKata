@@ -42,7 +42,7 @@ public class CoinController {
                 return currentCoinType;
             }
         }
-        return QUARTER;
+        return PENNY;
     }
     
     private boolean coinIsType(Coin coinToCheck, Coin referenceCoinType){
