@@ -34,5 +34,12 @@ public class CoinControllerTest {
         int systemBalanceInCents = coinController.getSystemBalanceInCents();
         assertEquals(15, systemBalanceInCents);
     }
+    
+    @Test
+    public void systemValueIsTenCentsAfterOneDimeInserted(){
+        coinController.insert(DIME);
+        int systemBalanceInCents = coinController.getSystemBalanceInCents();
+        assertEquals(10, systemBalanceInCents);
+    }
 
 }

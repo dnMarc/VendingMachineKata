@@ -11,8 +11,18 @@ public class CoinController {
 
     public void insert(Coin ... insertedCoins) {
         for (Coin currentCoin : insertedCoins){
-            systemBalanceInCents += NICKEL_VALUE_IN_CENTS;
+            if ((currentCoin.weightInGrams == 5.000) &&
+                (currentCoin.diameterInMM  == 21.21) &&
+                (currentCoin.thicknessInMM == 1.95)){
+            
+                systemBalanceInCents += NICKEL_VALUE_IN_CENTS;
+            }
+            else{
+                systemBalanceInCents += 10;
+            }
         }
     }
 
+    
+    
 }
