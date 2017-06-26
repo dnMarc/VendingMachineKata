@@ -30,9 +30,7 @@ public class CoinControllerTest {
     
     @Test
     public void systemValueIsFifteenCentsAfterThreeNickelsInserted(){
-        for (int i = 0; i < 3; i++){
-            coinController.insert(NICKEL);
-        }
+        coinController.insert(NICKEL, NICKEL, NICKEL);
         int systemBalanceInCents = coinController.getSystemBalanceInCents();
         assertEquals(15, systemBalanceInCents);
     }

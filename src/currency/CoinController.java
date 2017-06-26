@@ -9,8 +9,10 @@ public class CoinController {
         return systemBalanceInCents;
     }
 
-    public void insert(Coin insertedCoin) {
-        systemBalanceInCents += NICKEL_VALUE_IN_CENTS;
+    public void insert(Coin ... insertedCoins) {
+        for (Coin currentCoin : insertedCoins){
+            systemBalanceInCents += NICKEL_VALUE_IN_CENTS;
+        }
     }
 
 }
