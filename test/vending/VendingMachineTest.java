@@ -6,6 +6,8 @@ import org.junit.Test;
 
 import java.util.List;
 
+import static vending.Product.*;
+
 public class VendingMachineTest {
     
     private VendingMachine vendingMachine;
@@ -47,8 +49,16 @@ public class VendingMachineTest {
    
     @Test
     public void productReturnEmptyWithNoPurchaseAttempt(){
-        List<Product> returnedProducts = vendingMachine.checkProductReturn();
-        assertTrue(returnedProducts.isEmpty());
+        List<Product> dispensedProducts = vendingMachine.checkProductReturn();
+        assertTrue(dispensedProducts.isEmpty());
+    }
+    
+    @Test
+    public void productReturnContainsColaAfterColaPurchase(){
+        vendingMachine.attemptProductPurchase(COLA, 100);
+        List<Product> dispensedProducts = vendingMachine.checkProductReturn();
+        assertEquals(1, dispensedProducts.size());
+        assertEquals(COLA, dispensedProducts.get(0));
     }
 
 }
