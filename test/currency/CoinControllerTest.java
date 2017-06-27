@@ -133,6 +133,13 @@ public class CoinControllerTest {
         assertTrue(coinReturnedIsAsExpected(returnedCoins, DIME));
     }
     
+    @Test
+    public void dispenseQuarterIfExcessValueInsertedIsTwentyFiveCents(){
+        coinController.dispenseChange(25);
+        List<Coin> returnedCoins = coinController.getCoinsToDispense();
+        assertTrue(coinReturnedIsAsExpected(returnedCoins, QUARTER));
+    }
+    
     
     public static boolean coinReturnedIsAsExpected(List<Coin> returnedCoin, Coin expectedCoinType){
         if (returnedCoin.size() == 1){
