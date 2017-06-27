@@ -59,7 +59,7 @@ public class IntegrationTests {
     public void coinReturnContainsPennyWhenPennyInserted(){
         vendingMachine.insert(QUARTER, PENNY, NICKEL, DIME);
         List<Coin> returnedCoins = vendingMachine.checkCoinReturn();
-        assertTrue(coinReturnedIsAsExpected(returnedCoins, PENNY));
+        assertTrue(coinsReturnedAreAsExpected(returnedCoins, PENNY));
     }
     
     //END Accept Coins Functionality Tests
@@ -137,7 +137,7 @@ public class IntegrationTests {
         vendingMachine.insert(QUARTER, QUARTER, DIME, DIME);
         vendingMachine.attemptCandyPurchase();
         List<Coin> returnedCoins = vendingMachine.checkCoinReturn();
-        assertTrue(coinReturnedIsAsExpected(returnedCoins, NICKEL));
+        assertTrue(coinsReturnedAreAsExpected(returnedCoins, NICKEL));
     }
     
     @Test
@@ -145,7 +145,7 @@ public class IntegrationTests {
         vendingMachine.insert(QUARTER, QUARTER, QUARTER);
         vendingMachine.attemptCandyPurchase();
         List<Coin> returnedCoins = vendingMachine.checkCoinReturn();
-        assertTrue(coinReturnedIsAsExpected(returnedCoins, DIME));
+        assertTrue(coinsReturnedAreAsExpected(returnedCoins, DIME));
     }
     
     @Test
@@ -153,7 +153,7 @@ public class IntegrationTests {
         vendingMachine.insert(QUARTER, QUARTER, QUARTER);
         vendingMachine.attemptChipsPurchase();
         List<Coin> returnedCoins = vendingMachine.checkCoinReturn();
-        assertTrue(coinReturnedIsAsExpected(returnedCoins, QUARTER));
+        assertTrue(coinsReturnedAreAsExpected(returnedCoins, QUARTER));
     }
     
     @Test
@@ -161,24 +161,7 @@ public class IntegrationTests {
         vendingMachine.insert(QUARTER, PENNY, QUARTER, DIME, NICKEL);
         vendingMachine.attemptChipsPurchase();
         List<Coin> returnedCoins = vendingMachine.checkCoinReturn();
-        assertEquals(3, returnedCoins.size());
-        int numPennies = 0;
-        int numNickels = 0;
-        int numDimes = 0;
-        for (Coin currentCoin : returnedCoins){
-            if (currentCoin == PENNY){
-                numPennies++;
-            }
-            else if (currentCoin == NICKEL){
-                numNickels++;
-            }
-            else if (currentCoin == DIME){
-                numDimes++;
-            }
-        }
-        assertEquals(1, numPennies);
-        assertEquals(1, numNickels);
-        assertEquals(1, numDimes);
+        assertTrue(coinsReturnedAreAsExpected(returnedCoins, NICKEL, PENNY, DIME));
     }
 
 }

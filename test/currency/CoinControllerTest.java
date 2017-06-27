@@ -5,6 +5,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 
 import static currency.Coin.*;
 import static currency.CoinController.*;
@@ -85,7 +87,7 @@ public class CoinControllerTest {
     public void pennyReturnedtoCoinReturnWhenInserted(){
         coinController.insert(PENNY);
         List<Coin> returnedCoins = coinController.getCoinsToDispense();
-        assertTrue(coinReturnedIsAsExpected(returnedCoins, PENNY));
+        assertTrue(coinsReturnedAreAsExpected(returnedCoins, PENNY));
     }
     
     @Test
@@ -123,52 +125,69 @@ public class CoinControllerTest {
     public void dispenseNickelIfExcessValueInsertedIsFiveCents(){
         coinController.dispenseChange(NICKEL_VALUE_IN_CENTS);
         List<Coin> returnedCoins = coinController.getCoinsToDispense();
-        assertTrue(coinReturnedIsAsExpected(returnedCoins, NICKEL));
+        assertTrue(coinsReturnedAreAsExpected(returnedCoins, NICKEL));
     }
     
     @Test
     public void dispenseDimeIfExcessValueInsertedIsTenCents(){
         coinController.dispenseChange(DIME_VALUE_IN_CENTS);
         List<Coin> returnedCoins = coinController.getCoinsToDispense();
-        assertTrue(coinReturnedIsAsExpected(returnedCoins, DIME));
+        assertTrue(coinsReturnedAreAsExpected(returnedCoins, DIME));
     }
     
     @Test
     public void dispenseQuarterIfExcessValueInsertedIsTwentyFiveCents(){
         coinController.dispenseChange(QUARTER_VALUE_IN_CENTS);
         List<Coin> returnedCoins = coinController.getCoinsToDispense();
-        assertTrue(coinReturnedIsAsExpected(returnedCoins, QUARTER));
+        assertTrue(coinsReturnedAreAsExpected(returnedCoins, QUARTER));
     }
     
     @Test
     public void dispenseMultipleCoinsFromExcessValueInserted(){
         coinController.dispenseChange(QUARTER_VALUE_IN_CENTS + NICKEL_VALUE_IN_CENTS);
         List<Coin> returnedCoins = coinController.getCoinsToDispense();
-        assertEquals(2, returnedCoins.size());
-        int numQuarters = 0;
-        int numNickels = 0;
-        for (Coin currentCoin : returnedCoins){
-            if (currentCoin == QUARTER){
-                numQuarters++;
-            }
-            else if (currentCoin == NICKEL){
-                numNickels++;
-            }
-        }
-        assertEquals(1, numQuarters);
-        assertEquals(1, numNickels);
+        assertTrue(coinsReturnedAreAsExpected(returnedCoins, QUARTER, NICKEL));
     }
     
     //END Make Change Functionality Tests
     
     
-    public static boolean coinReturnedIsAsExpected(List<Coin> returnedCoin, Coin expectedCoinType){
-        if (returnedCoin.size() == 1){
-            if (returnedCoin.get(0) == expectedCoinType){
+    public static boolean coinsReturnedAreAsExpected(List<Coin> returnedCoins, Coin ... expectedCoinTypes ){
+        if (returnedCoins.size() == expectedCoinTypes.length){
+            Map<Coin, Integer> expectedNumCoinTypes = new HashMap<Coin, Integer>();
+            Map<Coin, Integer> actualNumCoinTypes   = new HashMap<Coin, Integer>();
+            
+            initializeCoinNumMapsWithZeros(expectedNumCoinTypes, actualNumCoinTypes);
+            
+            tabulateCoins(expectedNumCoinTypes, expectedCoinTypes);
+            
+            Coin[] arrayOfActualReturnedCoins = returnedCoins.toArray(new Coin[0]);
+            tabulateCoins(actualNumCoinTypes, arrayOfActualReturnedCoins);
+            
+            if (expectedNumCoinTypes.equals(actualNumCoinTypes)){
                 return true;
             }
         }
         return false;
     }
+
+    private static void initializeCoinNumMapsWithZeros(Map<Coin, Integer> expectedNumCoinTypes,
+            Map<Coin, Integer> actualNumCoinTypes) {
+        for (Coin currentCoinType : Coin.values()){
+            expectedNumCoinTypes.put(currentCoinType, 0);
+            actualNumCoinTypes.put(currentCoinType, 0);
+        }
+    }
+    
+    private static void tabulateCoins(Map<Coin, Integer> numCoinsMap, Coin[] arrayOfCoinsToBeTabulated) {
+        for (Coin currentCoin : arrayOfCoinsToBeTabulated){
+            numCoinsMap.put(currentCoin, numCoinsMap.get(currentCoin) + 1);
+        }
+    }
+    
+
+    
+
+    
 
 }
