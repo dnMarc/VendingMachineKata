@@ -160,7 +160,13 @@ public class CoinControllerTest {
         assertTrue(returnedCoins.isEmpty());
     }
     
-    
+    @Test
+    public void nickelManuallyReturned(){
+        coinController.insert(NICKEL);
+        coinController.manuallyReturnAllInsertedCoins();
+        List<Coin> returnedCoins = coinController.getCoinsToDispense();
+        assertTrue(coinsReturnedAreAsExpected(returnedCoins, NICKEL));
+    }
     
     
     public static boolean coinsReturnedAreAsExpected(List<Coin> returnedCoins, Coin ... expectedCoinTypes ){

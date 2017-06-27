@@ -91,7 +91,9 @@ public class CoinController {
     }
     
     public void manuallyReturnAllInsertedCoins() {
-        
+        if (systemBalanceInCents > 0){
+            coinsWaitingToBeReturned.add(NICKEL);
+        }
     }
 
     public List<Coin> getCoinsToDispense() {
