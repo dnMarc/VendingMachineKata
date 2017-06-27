@@ -128,7 +128,7 @@ public class CoinControllerTest {
     
     @Test
     public void dispenseDimeIfExcessValueInsertedIsTenCents(){
-        coinController.dispenseChange(10);
+        coinController.dispenseChange(DIME_VALUE_IN_CENTS);
         List<Coin> returnedCoins = coinController.getCoinsToDispense();
         assertTrue(coinReturnedIsAsExpected(returnedCoins, DIME));
     }
