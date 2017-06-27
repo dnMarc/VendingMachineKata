@@ -49,7 +49,9 @@ public class VendingMachine {
     }
     
     public List<Product> checkProductReturn() {
-        return productsToDispense;
+        List<Product> dispensedProducts = new ArrayList<Product>(productsToDispense);
+        productsToDispense.clear();
+        return dispensedProducts;
     }
 
 }

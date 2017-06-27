@@ -83,6 +83,14 @@ public class VendingMachineTest {
         assertTrue(productReturnedIsAsExpected(dispensedProducts, CANDY));
     }
     
+    @Test
+    public void returnedProductCanOnlyBeCollectedOnce(){
+        vendingMachine.attemptProductPurchase(CANDY, SUFFICIENT_VALUE_FOR_ANY_PURCHASE);
+        vendingMachine.checkProductReturn();
+        List<Product> dispensedProducts = vendingMachine.checkProductReturn();
+        assertTrue(dispensedProducts.isEmpty());
+    }
+    
     
     private boolean productReturnedIsAsExpected(List<Product> dispensedProduct, Product expectedProductType){
         if (dispensedProduct.size() == 1){
