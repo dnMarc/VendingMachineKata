@@ -135,7 +135,7 @@ public class CoinControllerTest {
     
     @Test
     public void dispenseQuarterIfExcessValueInsertedIsTwentyFiveCents(){
-        coinController.dispenseChange(25);
+        coinController.dispenseChange(QUARTER_VALUE_IN_CENTS);
         List<Coin> returnedCoins = coinController.getCoinsToDispense();
         assertTrue(coinReturnedIsAsExpected(returnedCoins, QUARTER));
     }
