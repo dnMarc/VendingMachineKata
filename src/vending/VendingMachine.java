@@ -39,9 +39,9 @@ public class VendingMachine {
         return displayBuffer;
     }
 
-    private String createFormattedCurrencyDisplay(int systemBalanceInCents) {
-        int numDollars  = systemBalanceInCents / 100;
-        int numCents    = systemBalanceInCents % 100;
+    private String createFormattedCurrencyDisplay(int valueInCents) {
+        int numDollars  = valueInCents / 100;
+        int numCents    = valueInCents % 100;
         return "$" + Integer.toString(numDollars) + "." +
                 String.format("%02d", numCents);
     }
