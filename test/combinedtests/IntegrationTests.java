@@ -184,6 +184,14 @@ public class IntegrationTests {
         assertTrue(returnedCoins.isEmpty());
     }
     
+    @Test
+    public void coinReturnContainsAllInsertedCoinsAfterManualCoinReturnAttempted(){
+        vendingMachine.insert(QUARTER, DIME, QUARTER, NICKEL);
+        vendingMachine.manuallyReturnAllInsertedCoins();
+        List<Coin> returnedCoins = vendingMachine.checkCoinReturn();
+        assertTrue(coinsReturnedAreAsExpected(returnedCoins, QUARTER, QUARTER, DIME, NICKEL));
+    }
+    
 
 
 }

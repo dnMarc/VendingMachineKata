@@ -51,7 +51,7 @@ public class VendingMachine {
     }
     
     public void manuallyReturnAllInsertedCoins() {
-        
+        coinManager.manuallyReturnAllInsertedCoins();
     }
 
     public List<Coin> checkCoinReturn() {
