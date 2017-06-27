@@ -155,5 +155,30 @@ public class IntegrationTests {
         List<Coin> returnedCoins = vendingMachine.checkCoinReturn();
         assertTrue(coinReturnedIsAsExpected(returnedCoins, QUARTER));
     }
+    
+    @Test
+    public void coinReturnContainsMixValidCoinsAndPenniesAfterPurchase(){
+        vendingMachine.insert(QUARTER, PENNY, QUARTER, DIME, NICKEL);
+        vendingMachine.attemptChipsPurchase();
+        List<Coin> returnedCoins = vendingMachine.checkCoinReturn();
+        assertEquals(3, returnedCoins.size());
+        int numPennies = 0;
+        int numNickels = 0;
+        int numDimes = 0;
+        for (Coin currentCoin : returnedCoins){
+            if (currentCoin == PENNY){
+                numPennies++;
+            }
+            else if (currentCoin == NICKEL){
+                numNickels++;
+            }
+            else if (currentCoin == DIME){
+                numDimes++;
+            }
+        }
+        assertEquals(1, numPennies);
+        assertEquals(1, numNickels);
+        assertEquals(1, numDimes);
+    }
 
 }
