@@ -69,13 +69,17 @@ public class VendingMachine {
     public void attemptProductPurchase(Product selectedProduct, int systemBalanceInCents) {
         int productCost = selectedProduct.getCostInCents();
         if (systemBalanceInCents >= productCost){
-            dispenseProduct(selectedProduct);
-            displayMessage("THANK YOU");
-            coinManager.resetSystemBalanceToZero();
+            completeProductPurchase(selectedProduct);
         }
         else{
             displayMessage("PRICE " + createFormattedCurrencyDisplay(productCost));
         }
+    }
+
+    private void completeProductPurchase(Product selectedProduct) {
+        dispenseProduct(selectedProduct);
+        displayMessage("THANK YOU");
+        coinManager.resetSystemBalanceToZero();
     }
     
     private void dispenseProduct(Product productToDispense){
