@@ -102,5 +102,13 @@ public class IntegrationTests {
         String displayStatus = vendingMachine.checkDisplay();
         assertEquals("THANK YOU", displayStatus);
     }
+    
+    @Test
+    public void systemDisplaysThankYouWithSuccessfulCandyPurchase(){
+        vendingMachine.insert(QUARTER, QUARTER, QUARTER);
+        vendingMachine.attemptCandyPurchase();
+        String displayStatus = vendingMachine.checkDisplay();
+        assertEquals("THANK YOU", displayStatus);
+    }
 
 }
