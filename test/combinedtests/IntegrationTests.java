@@ -172,5 +172,18 @@ public class IntegrationTests {
         List<Coin> returnedCoins = vendingMachine.checkCoinReturn();
         assertTrue(returnedCoins.isEmpty());
     }
+    
+    //END Make Change Functionality Tests
+    
+    //BEGIN Return Coins Functionality Tests
+    
+    @Test
+    public void coinReturnEmptyAfterNoCoinsInsertedAndManualCoinReturnAttempted(){
+        vendingMachine.manuallyReturnAllInsertedCoins();
+        List<Coin> returnedCoins = vendingMachine.checkCoinReturn();
+        assertTrue(returnedCoins.isEmpty());
+    }
+    
+
 
 }

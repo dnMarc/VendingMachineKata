@@ -49,6 +49,10 @@ public class VendingMachine {
     public void insert(Coin ... insertedCoins) {
         coinManager.insert(insertedCoins);
     }
+    
+    public void manuallyReturnAllInsertedCoins() {
+        
+    }
 
     public List<Coin> checkCoinReturn() {
         return coinManager.getCoinsToDispense();
@@ -102,6 +106,8 @@ public class VendingMachine {
         productsToDispense.clear();
         return dispensedProducts;
     }
+
+
 
 
 
