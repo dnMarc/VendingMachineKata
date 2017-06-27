@@ -7,6 +7,7 @@ import org.junit.Test;
 import java.util.List;
 
 import static vending.Product.*;
+import static vending.VendingMachine.*;
 
 public class VendingMachineTest {
     
@@ -118,6 +119,14 @@ public class VendingMachineTest {
         vendingMachine.createSystemDisplay(ZERO_VALUE_SYSTEM_BALANCE);
         String displayStatus = vendingMachine.createSystemDisplay(ZERO_VALUE_SYSTEM_BALANCE);
         assertEquals("INSERT COIN", displayStatus);
+    }
+    
+    @Test
+    public void displayBalanceAfterPriceWithInsufficientSystemBalance(){
+        vendingMachine.attemptProductPurchase(CANDY, CANDY_COST_IN_CENTS - 10);
+        vendingMachine.createSystemDisplay(CANDY_COST_IN_CENTS - 10);
+        String displayStatus = vendingMachine.createSystemDisplay(CANDY_COST_IN_CENTS - 10);
+        assertEquals("$0.55", displayStatus);
     }
     
     
