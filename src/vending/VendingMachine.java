@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 import currency.Coin;
 import currency.CoinController;
-import static vending.Product.*;
 
 public class VendingMachine {
     
@@ -25,14 +24,18 @@ public class VendingMachine {
 
     public String createSystemDisplay(int systemBalanceInCents) {
         if (textWaitingForDisplay != ""){
-            String displayBuffer = new String(textWaitingForDisplay);
-            textWaitingForDisplay = "";
-            return displayBuffer;
+            return consumeMessageWaitingForDisplay();
         }
         if (systemBalanceInCents > 0){
             return createFormattedCurrencyDisplay(systemBalanceInCents);
         }
         return "INSERT COIN";
+    }
+
+    private String consumeMessageWaitingForDisplay() {
+        String displayBuffer = new String(textWaitingForDisplay);
+        textWaitingForDisplay = "";
+        return displayBuffer;
     }
 
     private String createFormattedCurrencyDisplay(int systemBalanceInCents) {
