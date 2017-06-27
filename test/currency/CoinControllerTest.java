@@ -7,6 +7,7 @@ import org.junit.Test;
 import java.util.List;
 
 import static currency.Coin.*;
+import static currency.CoinController.*;
 
 public class CoinControllerTest {
     
@@ -120,7 +121,7 @@ public class CoinControllerTest {
     
     @Test
     public void dispenseNickelIfExcessValueInsertedIsFiveCents(){
-        coinController.dispenseChange(5);
+        coinController.dispenseChange(NICKEL_VALUE_IN_CENTS);
         List<Coin> returnedCoins = coinController.getCoinsToDispense();
         assertTrue(coinReturnedIsAsExpected(returnedCoins, NICKEL));
     }

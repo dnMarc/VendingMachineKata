@@ -11,7 +11,7 @@ import static currency.Coin.*;
 public class CoinController {
     
     private static final int PENNY_VALUE_IN_CENTS   = 0;
-    private static final int NICKEL_VALUE_IN_CENTS  = 5;
+    public static final int NICKEL_VALUE_IN_CENTS  = 5;
     private static final int DIME_VALUE_IN_CENTS    = 10;
     private static final int QUARTER_VALUE_IN_CENTS = 25;
     private int systemBalanceInCents = 0;
@@ -71,7 +71,7 @@ public class CoinController {
     }
     
     public void dispenseChange(int excessPurchaseValueInserted) {
-        if (excessPurchaseValueInserted >= 5){
+        if (excessPurchaseValueInserted >= NICKEL_VALUE_IN_CENTS){
             coinsWaitingToBeReturned.add(NICKEL);
         }
     }
