@@ -192,6 +192,16 @@ public class IntegrationTests {
         assertTrue(coinsReturnedAreAsExpected(returnedCoins, QUARTER, QUARTER, DIME, NICKEL));
     }
     
+    @Test
+    public void systemDisplaysInsertCoinAfterManuallyReturningInsertedCoins(){
+        vendingMachine.insert(QUARTER);
+        vendingMachine.manuallyReturnAllInsertedCoins();
+        String displayStatus = vendingMachine.checkDisplay();
+        assertEquals("INSERT COIN", displayStatus);
+    }
+    
+    //END Return Coins Functionality Tests
+    
 
 
 }
