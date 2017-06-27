@@ -71,7 +71,9 @@ public class CoinController {
     }
     
     public void dispenseChange(int excessPurchaseValueInserted) {
-        
+        if (excessPurchaseValueInserted >= 5){
+            coinsWaitingToBeReturned.add(NICKEL);
+        }
     }
 
     public List<Coin> getCoinsToDispense() {

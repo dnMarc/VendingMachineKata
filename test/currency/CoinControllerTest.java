@@ -118,6 +118,13 @@ public class CoinControllerTest {
         assertTrue(returnedCoins.isEmpty());
     }
     
+    @Test
+    public void dispenseNickelIfExcessValueInsertedIsFiveCents(){
+        coinController.dispenseChange(5);
+        List<Coin> returnedCoins = coinController.getCoinsToDispense();
+        assertTrue(coinReturnedIsAsExpected(returnedCoins, NICKEL));
+    }
+    
     
     public static boolean coinReturnedIsAsExpected(List<Coin> returnedCoin, Coin expectedCoinType){
         if (returnedCoin.size() == 1){
