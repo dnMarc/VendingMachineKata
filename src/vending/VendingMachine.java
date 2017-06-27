@@ -90,6 +90,10 @@ public class VendingMachine {
         textWaitingForDisplay = messageToDisplay;
     }
     
+    public int calculateExcessValue(Product selectedProduct, int valueInCentsUsedForPurchase) {
+        return 0;
+    }
+    
     public List<Product> checkProductReturn() {
         List<Product> dispensedProducts = new ArrayList<Product>(productsToDispense);
         productsToDispense.clear();

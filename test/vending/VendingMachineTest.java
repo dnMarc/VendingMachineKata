@@ -136,6 +136,16 @@ public class VendingMachineTest {
         assertEquals("THANK YOU", displayStatus);
     }
     
+    //END Select Product Functionality Tests
+    
+    //BEGIN Make Change Functionality Tests
+    
+    @Test
+    public void exactProductCostUsedForPurchaseEqualsZeroExcessValue(){
+        int excessValueInCents = vendingMachine.calculateExcessValue(CHIPS, CHIPS_COST_IN_CENTS);
+        assertEquals(0, excessValueInCents);
+    }
+    
     
     private boolean productReturnedIsAsExpected(List<Product> dispensedProduct, Product expectedProductType){
         if (dispensedProduct.size() == 1){
