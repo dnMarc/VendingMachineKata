@@ -163,5 +163,14 @@ public class IntegrationTests {
         List<Coin> returnedCoins = vendingMachine.checkCoinReturn();
         assertTrue(coinsReturnedAreAsExpected(returnedCoins, NICKEL, PENNY, DIME));
     }
+    
+    @Test
+    public void coinsCanOnlyBeCollectedOnceFromCoinReturn(){
+        vendingMachine.insert(QUARTER, PENNY, QUARTER, DIME, NICKEL);
+        vendingMachine.attemptChipsPurchase();
+        vendingMachine.checkCoinReturn();
+        List<Coin> returnedCoins = vendingMachine.checkCoinReturn();
+        assertTrue(returnedCoins.isEmpty());
+    }
 
 }
