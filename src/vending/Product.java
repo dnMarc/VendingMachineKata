@@ -5,9 +5,13 @@ public enum Product {
     
     CHIPS(50);
     
-    public int costInCents;
+    private final int costInCents;
     
     Product(int cost){
         this.costInCents = cost;
+    }
+    
+    public int getCostInCents(){
+        return costInCents;
     }
 }
