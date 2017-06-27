@@ -11,6 +11,7 @@ import static vending.Product.*;
 public class VendingMachineTest {
     
     private static final int SUFFICIENT_VALUE_FOR_ANY_PURCHASE = 100;
+    private static final int ZERO_VALUE_SYSTEM_BALANCE         = 0;
     private VendingMachine vendingMachine;
     
     @Before
@@ -70,7 +71,7 @@ public class VendingMachineTest {
     
     @Test
     public void productReturnEmptyWithFailedPurchaseAttempt(){
-        vendingMachine.attemptProductPurchase(COLA, 0);
+        vendingMachine.attemptProductPurchase(COLA, ZERO_VALUE_SYSTEM_BALANCE);
         List<Product> dispensedProducts = vendingMachine.checkProductReturn();
         assertTrue(dispensedProducts.isEmpty());
     }
