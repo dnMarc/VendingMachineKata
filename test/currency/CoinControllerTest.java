@@ -194,6 +194,16 @@ public class CoinControllerTest {
         assertTrue(coinsReturnedAreAsExpected(returnedCoins, QUARTER, DIME, DIME, NICKEL));
     }
     
+    @Test
+    public void systemBalanceResetToZeroAfterManualCoinReturn(){
+        coinController.insert(QUARTER, DIME);
+        coinController.manuallyReturnAllInsertedCoins();
+        int systemBalanceInCents = coinController.getSystemBalanceInCents();
+        assertEquals(0, systemBalanceInCents);
+    }
+    
+    //END Return Coins Functionality Tests
+    
     
     
     

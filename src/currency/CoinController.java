@@ -97,6 +97,7 @@ public class CoinController {
            coinsWaitingToBeReturned.add(currentCoin);
        }
        acceptedCoins.clear();
+       resetSystemBalanceToZero();
     }
 
     public List<Coin> getCoinsToDispense() {
