@@ -57,11 +57,15 @@ public class VendingMachine {
         int productCost = selectedProduct.getCostInCents();
         if (systemBalanceInCents >= productCost){
             productsToDispense.add(selectedProduct);
-            textWaitingForDisplay = "THANK YOU";
+            displayMessage("THANK YOU");
         }
         else{
-            textWaitingForDisplay = "PRICE " + createFormattedCurrencyDisplay(productCost);
+            displayMessage("PRICE " + createFormattedCurrencyDisplay(productCost));
         }
+    }
+    
+    private void displayMessage(String messageToDisplay){
+        textWaitingForDisplay = messageToDisplay;
     }
     
     public List<Product> checkProductReturn() {
