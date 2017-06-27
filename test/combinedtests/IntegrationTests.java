@@ -147,5 +147,13 @@ public class IntegrationTests {
         List<Coin> returnedCoins = vendingMachine.checkCoinReturn();
         assertTrue(coinReturnedIsAsExpected(returnedCoins, DIME));
     }
+    
+    @Test
+    public void coinReturnContainsOneQuarterAfterPurchaseMadeWithExcessTwentyFiveCents(){
+        vendingMachine.insert(QUARTER, QUARTER, QUARTER);
+        vendingMachine.attemptChipsPurchase();
+        List<Coin> returnedCoins = vendingMachine.checkCoinReturn();
+        assertTrue(coinReturnedIsAsExpected(returnedCoins, QUARTER));
+    }
 
 }
