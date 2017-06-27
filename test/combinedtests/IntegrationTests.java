@@ -86,5 +86,13 @@ public class IntegrationTests {
         String displayStatus = vendingMachine.checkDisplay();
         assertEquals("PRICE $0.65", displayStatus);
     }
+    
+    @Test
+    public void systemDisplaysThankYouWithSuccessfulColaPurchase(){
+        vendingMachine.insert(QUARTER, QUARTER, QUARTER, QUARTER);
+        vendingMachine.attemptColaPurchase();
+        String displayStatus = vendingMachine.checkDisplay();
+        assertEquals("THANK YOU", displayStatus);
+    }
 
 }
