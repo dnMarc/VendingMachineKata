@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import currency.Coin;
 import currency.CoinController;
+import static vending.Product.*;
 
 public class VendingMachine {
     
@@ -52,7 +53,12 @@ public class VendingMachine {
             productsToDispense.add(selectedProduct);
         }
         else{
-            textWaitingForDisplay = "PRICE $1.00";
+            if (selectedProduct == COLA){
+                textWaitingForDisplay = "PRICE $1.00";
+            }
+            else{
+                textWaitingForDisplay = "PRICE $0.50";
+            }
         }
     }
     
