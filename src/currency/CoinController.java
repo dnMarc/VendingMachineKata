@@ -69,12 +69,18 @@ public class CoinController {
             }
         return false;
     }
+    
+    public void dispenseChange(int excessPurchaseValueInserted) {
+        
+    }
 
     public List<Coin> getCoinsToDispense() {
         List<Coin> returnedCoins = new ArrayList<Coin>(coinsWaitingToBeReturned);
         coinsWaitingToBeReturned.clear();
         return returnedCoins;
     }
+
+    
 
     
 

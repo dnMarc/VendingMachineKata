@@ -109,6 +109,15 @@ public class CoinControllerTest {
     
     //END Select Product Functionality Tests
     
+    //BEGIN Make Change Functionality Tests
+    
+    @Test
+    public void dispenseNoCoinsIfExcessValueInsertedIsZero(){
+        coinController.dispenseChange(0);
+        List<Coin> returnedCoins = coinController.getCoinsToDispense();
+        assertTrue(returnedCoins.isEmpty());
+    }
+    
     
     public static boolean coinReturnedIsAsExpected(List<Coin> returnedCoin, Coin expectedCoinType){
         if (returnedCoin.size() == 1){
