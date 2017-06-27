@@ -12,6 +12,8 @@ public class VendingMachine {
     public static final int CHIPS_COST_IN_CENTS = 50;
     public static final int CANDY_COST_IN_CENTS = 65;
     
+    private String textWaitingForDisplay = "";
+    
     private List<Product> productsToDispense = new ArrayList<Product>();
     
     private CoinController coinManager = new CoinController();
@@ -21,6 +23,9 @@ public class VendingMachine {
     }
 
     public String createSystemDisplay(int systemBalanceInCents) {
+        if (textWaitingForDisplay != ""){
+            return textWaitingForDisplay;
+        }
         if (systemBalanceInCents > 0){
             return createFormattedCurrencyDisplay(systemBalanceInCents);
         }
@@ -45,6 +50,9 @@ public class VendingMachine {
     public void attemptProductPurchase(Product selectedProduct, int systemBalanceInCents) {
         if (systemBalanceInCents >= selectedProduct.getCostInCents()){
             productsToDispense.add(selectedProduct);
+        }
+        else{
+            textWaitingForDisplay = "PRICE $1.00";
         }
     }
     

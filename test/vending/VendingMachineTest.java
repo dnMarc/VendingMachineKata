@@ -91,6 +91,13 @@ public class VendingMachineTest {
         assertTrue(dispensedProducts.isEmpty());
     }
     
+    @Test
+    public void displayPriceWhenColaPurchaseAttemptedWithInsufficientValue(){
+    	vendingMachine.attemptProductPurchase(COLA, ZERO_VALUE_SYSTEM_BALANCE);
+    	String displayStatus = vendingMachine.createSystemDisplay(ZERO_VALUE_SYSTEM_BALANCE);
+    	assertEquals("PRICE $1.00", displayStatus);
+    }
+    
     
     private boolean productReturnedIsAsExpected(List<Product> dispensedProduct, Product expectedProductType){
         if (dispensedProduct.size() == 1){
