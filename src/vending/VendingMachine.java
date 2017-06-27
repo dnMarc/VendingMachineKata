@@ -40,7 +40,9 @@ public class VendingMachine {
     }
 
     public void attemptProductPurchase(Product selectedProduct, int systemBalanceInCents) {
-        productsToDispense.add(selectedProduct);
+        if (systemBalanceInCents >= selectedProduct.costInCents){
+            productsToDispense.add(selectedProduct);
+        }
     }
     
     public List<Product> checkProductReturn() {
