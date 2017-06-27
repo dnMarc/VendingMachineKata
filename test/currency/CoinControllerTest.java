@@ -168,6 +168,17 @@ public class CoinControllerTest {
         assertTrue(coinsReturnedAreAsExpected(returnedCoins, NICKEL));
     }
     
+    @Test
+    public void dimeManuallyReturned(){
+        coinController.insert(DIME);
+        coinController.manuallyReturnAllInsertedCoins();
+        List<Coin> returnedCoins = coinController.getCoinsToDispense();
+        assertTrue(coinsReturnedAreAsExpected(returnedCoins, DIME));
+    }
+    
+    
+    
+    
     
     public static boolean coinsReturnedAreAsExpected(List<Coin> returnedCoins, Coin ... expectedCoinTypes ){
         if (returnedCoins.size() == expectedCoinTypes.length){

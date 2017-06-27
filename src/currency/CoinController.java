@@ -17,6 +17,7 @@ public class CoinController {
     private int systemBalanceInCents = 0;
     
     private List<Coin> coinsWaitingToBeReturned  = new ArrayList<Coin>();
+    private List<Coin> acceptedCoins             = new ArrayList<Coin>();
     
     private Map<Coin, Integer> coinValuesInCents = new HashMap<Coin, Integer>();
 
@@ -44,6 +45,7 @@ public class CoinController {
             Coin determinedCoinType = determineCoinType(currentCoin);
             if (determinedCoinType != PENNY){
                 systemBalanceInCents += coinValuesInCents.get(determinedCoinType);
+                acceptedCoins.add(currentCoin);
             }
             else{
                 coinsWaitingToBeReturned.add(currentCoin);
@@ -91,9 +93,9 @@ public class CoinController {
     }
     
     public void manuallyReturnAllInsertedCoins() {
-        if (systemBalanceInCents > 0){
-            coinsWaitingToBeReturned.add(NICKEL);
-        }
+       for (Coin currentCoin : acceptedCoins){
+           coinsWaitingToBeReturned.add(currentCoin);
+       }
     }
 
     public List<Coin> getCoinsToDispense() {
