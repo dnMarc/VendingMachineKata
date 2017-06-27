@@ -61,5 +61,16 @@ public class IntegrationTests {
         List<Coin> returnedCoins = vendingMachine.checkCoinReturn();
         assertTrue(coinReturnedIsAsExpected(returnedCoins, PENNY));
     }
+    
+    //END Accept Coins Functionality Tests
+    
+    //BEGIN Select Product Functionality Tests
+    
+    @Test
+    public void systemDisplaysPriceWithFailedColaPurchaseAttempt(){
+        vendingMachine.attemptColaPurchase();
+        String displayStatus = vendingMachine.checkDisplay();
+        assertEquals("PRICE $1.00", displayStatus);
+    }
 
 }

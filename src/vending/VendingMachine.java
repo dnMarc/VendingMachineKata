@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import currency.Coin;
 import currency.CoinController;
+import static vending.Product.*;
 
 public class VendingMachine {
     
@@ -52,6 +53,10 @@ public class VendingMachine {
     public List<Coin> checkCoinReturn() {
         return coinManager.getCoinsToDispense();
     }
+    
+    public void attemptColaPurchase() {
+        attemptProductPurchase(COLA, coinManager.getSystemBalanceInCents());
+    }
 
     public void attemptProductPurchase(Product selectedProduct, int systemBalanceInCents) {
         int productCost = selectedProduct.getCostInCents();
@@ -77,5 +82,7 @@ public class VendingMachine {
         productsToDispense.clear();
         return dispensedProducts;
     }
+
+
 
 }
