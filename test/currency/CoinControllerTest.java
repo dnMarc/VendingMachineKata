@@ -126,6 +126,13 @@ public class CoinControllerTest {
         assertTrue(coinReturnedIsAsExpected(returnedCoins, NICKEL));
     }
     
+    @Test
+    public void dispenseDimeIfExcessValueInsertedIsTenCents(){
+        coinController.dispenseChange(10);
+        List<Coin> returnedCoins = coinController.getCoinsToDispense();
+        assertTrue(coinReturnedIsAsExpected(returnedCoins, DIME));
+    }
+    
     
     public static boolean coinReturnedIsAsExpected(List<Coin> returnedCoin, Coin expectedCoinType){
         if (returnedCoin.size() == 1){

@@ -71,7 +71,10 @@ public class CoinController {
     }
     
     public void dispenseChange(int excessPurchaseValueInserted) {
-        if (excessPurchaseValueInserted >= NICKEL_VALUE_IN_CENTS){
+        if (excessPurchaseValueInserted >= 10){
+            coinsWaitingToBeReturned.add(DIME);
+        }
+        else if (excessPurchaseValueInserted >= NICKEL_VALUE_IN_CENTS){
             coinsWaitingToBeReturned.add(NICKEL);
         }
     }
