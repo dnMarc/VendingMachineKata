@@ -58,16 +58,25 @@ public class VendingMachineTest {
     public void productReturnContainsColaAfterColaPurchase(){
         vendingMachine.attemptProductPurchase(COLA, SUFFICIENT_VALUE_FOR_ANY_PURCHASE);
         List<Product> dispensedProducts = vendingMachine.checkProductReturn();
-        assertEquals(1, dispensedProducts.size());
-        assertEquals(COLA, dispensedProducts.get(0));
+        assertTrue(productReturnedIsAsExpected(dispensedProducts, COLA));
     }
     
     @Test
     public void productReturnContainsChipsAfterChipsPurchase(){
         vendingMachine.attemptProductPurchase(CHIPS, SUFFICIENT_VALUE_FOR_ANY_PURCHASE);
         List<Product> dispensedProducts = vendingMachine.checkProductReturn();
-        assertEquals(1, dispensedProducts.size());
-        assertEquals(CHIPS, dispensedProducts.get(0));
+        assertTrue(productReturnedIsAsExpected(dispensedProducts, CHIPS));
+    }
+    
+    
+    
+    private boolean productReturnedIsAsExpected(List<Product> dispensedProduct, Product expectedProductType){
+        if (dispensedProduct.size() == 1){
+            if (dispensedProduct.get(0) == expectedProductType){
+                return true;
+            }
+        }
+        return false;
     }
 
 }
