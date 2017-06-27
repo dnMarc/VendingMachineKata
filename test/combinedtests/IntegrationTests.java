@@ -121,5 +121,15 @@ public class IntegrationTests {
     }
     
     //END Select Product Functionality Tests
+    
+    //BEGIN Make Change Functionality Tests
+    
+    @Test
+    public void coinReturnEmptyAfterPurchaseMadeWithExactChange(){
+        vendingMachine.insert(QUARTER, QUARTER);
+        vendingMachine.attemptChipsPurchase();
+        List<Coin> returnedCoins = vendingMachine.checkCoinReturn();
+        assertTrue(returnedCoins.isEmpty());
+    }
 
 }
