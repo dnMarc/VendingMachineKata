@@ -78,7 +78,13 @@ public class IntegrationTests {
         vendingMachine.attemptChipsPurchase();
         String displayStatus = vendingMachine.checkDisplay();
         assertEquals("PRICE $0.50", displayStatus);
-        
+    }
+    
+    @Test
+    public void systemDisplaysPriceWithFailedCandyPurchaseAttempt(){
+        vendingMachine.attemptCandyPurchase();
+        String displayStatus = vendingMachine.checkDisplay();
+        assertEquals("PRICE $0.65", displayStatus);
     }
 
 }

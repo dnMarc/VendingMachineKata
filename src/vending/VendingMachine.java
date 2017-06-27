@@ -61,6 +61,10 @@ public class VendingMachine {
     public void attemptChipsPurchase() {
         attemptProductPurchase(CHIPS,   coinManager.getSystemBalanceInCents());
     }
+    
+    public void attemptCandyPurchase() {
+        attemptProductPurchase(CANDY,   coinManager.getSystemBalanceInCents());
+    }
 
     public void attemptProductPurchase(Product selectedProduct, int systemBalanceInCents) {
         int productCost = selectedProduct.getCostInCents();
