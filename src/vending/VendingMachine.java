@@ -10,6 +10,7 @@ public class VendingMachine {
     
     public static final int COLA_COST_IN_CENTS  = 100;
     public static final int CHIPS_COST_IN_CENTS = 50;
+    public static final int CANDY_COST_IN_CENTS = 65;
     
     private List<Product> productsToDispense = new ArrayList<Product>();
     

@@ -7,7 +7,7 @@ public enum Product {
     
     CHIPS(CHIPS_COST_IN_CENTS),
     
-    CANDY(65);
+    CANDY(CANDY_COST_IN_CENTS);
     
     private final int costInCents;
     
