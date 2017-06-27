@@ -91,7 +91,8 @@ public class VendingMachine {
     }
     
     public int calculateExcessValue(Product selectedProduct, int valueInCentsUsedForPurchase) {
-        return 0;
+        int productCostInCents = selectedProduct.getCostInCents();
+        return valueInCentsUsedForPurchase - productCostInCents;
     }
     
     public List<Product> checkProductReturn() {
