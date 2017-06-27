@@ -56,12 +56,16 @@ public class VendingMachine {
     public void attemptProductPurchase(Product selectedProduct, int systemBalanceInCents) {
         int productCost = selectedProduct.getCostInCents();
         if (systemBalanceInCents >= productCost){
-            productsToDispense.add(selectedProduct);
+            dispenseProduct(selectedProduct);
             displayMessage("THANK YOU");
         }
         else{
             displayMessage("PRICE " + createFormattedCurrencyDisplay(productCost));
         }
+    }
+    
+    private void dispenseProduct(Product productToDispense){
+        productsToDispense.add(productToDispense);
     }
     
     private void displayMessage(String messageToDisplay){
