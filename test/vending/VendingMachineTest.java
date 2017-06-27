@@ -129,6 +129,13 @@ public class VendingMachineTest {
         assertEquals("$0.55", displayStatus);
     }
     
+    @Test
+    public void displayThankYouAfterSuccessfulProductPurchase(){
+        vendingMachine.attemptProductPurchase(COLA, SUFFICIENT_VALUE_FOR_ANY_PURCHASE);
+        String displayStatus = vendingMachine.createSystemDisplay(ZERO_VALUE_SYSTEM_BALANCE);
+        assertEquals("THANK YOU", displayStatus);
+    }
+    
     
     private boolean productReturnedIsAsExpected(List<Product> dispensedProduct, Product expectedProductType){
         if (dispensedProduct.size() == 1){
