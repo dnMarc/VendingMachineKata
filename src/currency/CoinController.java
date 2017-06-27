@@ -96,6 +96,7 @@ public class CoinController {
        for (Coin currentCoin : acceptedCoins){
            coinsWaitingToBeReturned.add(currentCoin);
        }
+       acceptedCoins.clear();
     }
 
     public List<Coin> getCoinsToDispense() {

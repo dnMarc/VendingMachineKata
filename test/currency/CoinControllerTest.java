@@ -176,6 +176,16 @@ public class CoinControllerTest {
         assertTrue(coinsReturnedAreAsExpected(returnedCoins, DIME));
     }
     
+    @Test
+    public void coinsCanBeManuallyReturnedOnlyOnce(){
+        coinController.insert(DIME, NICKEL);
+        coinController.manuallyReturnAllInsertedCoins();
+        coinController.getCoinsToDispense();
+        coinController.manuallyReturnAllInsertedCoins();
+        List<Coin> returnedCoins = coinController.getCoinsToDispense();
+        assertTrue(returnedCoins.isEmpty());
+    }
+    
     
     
     
