@@ -25,7 +25,9 @@ public class VendingMachine {
 
     public String createSystemDisplay(int systemBalanceInCents) {
         if (textWaitingForDisplay != ""){
-            return textWaitingForDisplay;
+            String displayBuffer = new String(textWaitingForDisplay);
+            textWaitingForDisplay = "";
+            return displayBuffer;
         }
         if (systemBalanceInCents > 0){
             return createFormattedCurrencyDisplay(systemBalanceInCents);

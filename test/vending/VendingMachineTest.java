@@ -112,6 +112,14 @@ public class VendingMachineTest {
         assertEquals("PRICE $0.65", displayStatus);
     }
     
+    @Test
+    public void displayInsertCoinAfterPriceWithEmptySystemBalance(){
+        vendingMachine.attemptProductPurchase(CANDY, ZERO_VALUE_SYSTEM_BALANCE);
+        vendingMachine.createSystemDisplay(ZERO_VALUE_SYSTEM_BALANCE);
+        String displayStatus = vendingMachine.createSystemDisplay(ZERO_VALUE_SYSTEM_BALANCE);
+        assertEquals("INSERT COIN", displayStatus);
+    }
+    
     
     private boolean productReturnedIsAsExpected(List<Product> dispensedProduct, Product expectedProductType){
         if (dispensedProduct.size() == 1){
