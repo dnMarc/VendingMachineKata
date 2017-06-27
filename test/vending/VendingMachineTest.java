@@ -76,6 +76,12 @@ public class VendingMachineTest {
         assertTrue(dispensedProducts.isEmpty());
     }
     
+    @Test
+    public void productReturnContainsCandyAfterCandyPurchase(){
+        vendingMachine.attemptProductPurchase(CANDY, SUFFICIENT_VALUE_FOR_ANY_PURCHASE);
+        List<Product> dispensedProducts = vendingMachine.checkProductReturn();
+        assertTrue(productReturnedIsAsExpected(dispensedProducts, CANDY));
+    }
     
     
     private boolean productReturnedIsAsExpected(List<Product> dispensedProduct, Product expectedProductType){

@@ -5,7 +5,9 @@ import static vending.VendingMachine.*;
 public enum Product {
     COLA(COLA_COST_IN_CENTS),
     
-    CHIPS(CHIPS_COST_IN_CENTS);
+    CHIPS(CHIPS_COST_IN_CENTS),
+    
+    CANDY(65);
     
     private final int costInCents;
     
