@@ -110,5 +110,16 @@ public class IntegrationTests {
         String displayStatus = vendingMachine.checkDisplay();
         assertEquals("THANK YOU", displayStatus);
     }
+    
+    @Test
+    public void systemDisplaysInsertCoinAfterThankYou(){
+        vendingMachine.insert(QUARTER, QUARTER, QUARTER);
+        vendingMachine.attemptCandyPurchase();
+        vendingMachine.checkDisplay();
+        String displayStatus = vendingMachine.checkDisplay();
+        assertEquals("INSERT COIN", displayStatus);
+    }
+    
+    //END Select Product Functionality Tests
 
 }

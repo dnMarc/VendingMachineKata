@@ -71,6 +71,7 @@ public class VendingMachine {
         if (systemBalanceInCents >= productCost){
             dispenseProduct(selectedProduct);
             displayMessage("THANK YOU");
+            coinManager.resetSystemBalanceToZero();
         }
         else{
             displayMessage("PRICE " + createFormattedCurrencyDisplay(productCost));
