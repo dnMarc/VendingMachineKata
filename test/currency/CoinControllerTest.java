@@ -186,6 +186,14 @@ public class CoinControllerTest {
         assertTrue(returnedCoins.isEmpty());
     }
     
+    @Test
+    public void mixOfCoinsCanBeManuallyReturned(){
+        coinController.insert(QUARTER, DIME, NICKEL, DIME);
+        coinController.manuallyReturnAllInsertedCoins();
+        List<Coin> returnedCoins = coinController.getCoinsToDispense();
+        assertTrue(coinsReturnedAreAsExpected(returnedCoins, QUARTER, DIME, DIME, NICKEL));
+    }
+    
     
     
     
