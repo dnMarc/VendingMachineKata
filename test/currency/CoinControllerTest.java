@@ -140,6 +140,27 @@ public class CoinControllerTest {
         assertTrue(coinReturnedIsAsExpected(returnedCoins, QUARTER));
     }
     
+    @Test
+    public void dispenseMultipleCoinsFromExcessValueInserted(){
+        coinController.dispenseChange(QUARTER_VALUE_IN_CENTS + NICKEL_VALUE_IN_CENTS);
+        List<Coin> returnedCoins = coinController.getCoinsToDispense();
+        assertEquals(2, returnedCoins.size());
+        int numQuarters = 0;
+        int numNickels = 0;
+        for (Coin currentCoin : returnedCoins){
+            if (currentCoin == QUARTER){
+                numQuarters++;
+            }
+            else if (currentCoin == NICKEL){
+                numNickels++;
+            }
+        }
+        assertEquals(1, numQuarters);
+        assertEquals(1, numNickels);
+    }
+    
+    //END Make Change Functionality Tests
+    
     
     public static boolean coinReturnedIsAsExpected(List<Coin> returnedCoin, Coin expectedCoinType){
         if (returnedCoin.size() == 1){

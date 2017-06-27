@@ -71,14 +71,19 @@ public class CoinController {
     }
     
     public void dispenseChange(int excessPurchaseValueInserted) {
-        if (excessPurchaseValueInserted >= QUARTER_VALUE_IN_CENTS){
-            coinsWaitingToBeReturned.add(QUARTER);
-        }
-        else if (excessPurchaseValueInserted >= DIME_VALUE_IN_CENTS){
-            coinsWaitingToBeReturned.add(DIME);
-        }
-        else if (excessPurchaseValueInserted >= NICKEL_VALUE_IN_CENTS){
-            coinsWaitingToBeReturned.add(NICKEL);
+        while (excessPurchaseValueInserted > 0){
+            if (excessPurchaseValueInserted >= QUARTER_VALUE_IN_CENTS){
+                coinsWaitingToBeReturned.add(QUARTER);
+                excessPurchaseValueInserted -= QUARTER_VALUE_IN_CENTS;
+            }
+            else if (excessPurchaseValueInserted >= DIME_VALUE_IN_CENTS){
+                coinsWaitingToBeReturned.add(DIME);
+                excessPurchaseValueInserted -= DIME_VALUE_IN_CENTS;
+            }
+            else if (excessPurchaseValueInserted >= NICKEL_VALUE_IN_CENTS){
+                coinsWaitingToBeReturned.add(NICKEL);
+                excessPurchaseValueInserted -= NICKEL_VALUE_IN_CENTS;
+            }
         }
     }
 
