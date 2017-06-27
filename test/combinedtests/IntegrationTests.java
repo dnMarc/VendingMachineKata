@@ -94,5 +94,13 @@ public class IntegrationTests {
         String displayStatus = vendingMachine.checkDisplay();
         assertEquals("THANK YOU", displayStatus);
     }
+    
+    @Test
+    public void systemDisplaysThankYouWithSuccessfulChipsPurchase(){
+        vendingMachine.insert(QUARTER, QUARTER);
+        vendingMachine.attemptChipsPurchase();
+        String displayStatus = vendingMachine.checkDisplay();
+        assertEquals("THANK YOU", displayStatus);
+    }
 
 }
