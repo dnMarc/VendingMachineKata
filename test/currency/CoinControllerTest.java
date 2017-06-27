@@ -151,6 +151,17 @@ public class CoinControllerTest {
     
     //END Make Change Functionality Tests
     
+    //BEGIN Return Coins Functionality Tests
+    
+    @Test
+    public void noCoinsManuallyReturnedWhenNoCoinsInserted(){
+        coinController.manuallyReturnAllInsertedCoins();
+        List<Coin> returnedCoins = coinController.getCoinsToDispense();
+        assertTrue(returnedCoins.isEmpty());
+    }
+    
+    
+    
     
     public static boolean coinsReturnedAreAsExpected(List<Coin> returnedCoins, Coin ... expectedCoinTypes ){
         if (returnedCoins.size() == expectedCoinTypes.length){
@@ -185,9 +196,6 @@ public class CoinControllerTest {
         }
     }
     
-
-    
-
     
 
 }

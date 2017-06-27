@@ -89,6 +89,10 @@ public class CoinController {
         int valueInCentsOfDispensedCoin = coinValuesInCents.get(coinToBeDispensed);
         return valueInCentsOfDispensedCoin;
     }
+    
+    public void manuallyReturnAllInsertedCoins() {
+        
+    }
 
     public List<Coin> getCoinsToDispense() {
         List<Coin> returnedCoins = new ArrayList<Coin>(coinsWaitingToBeReturned);
