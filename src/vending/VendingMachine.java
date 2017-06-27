@@ -49,16 +49,12 @@ public class VendingMachine {
     }
 
     public void attemptProductPurchase(Product selectedProduct, int systemBalanceInCents) {
-        if (systemBalanceInCents >= selectedProduct.getCostInCents()){
+        int productCost = selectedProduct.getCostInCents();
+        if (systemBalanceInCents >= productCost){
             productsToDispense.add(selectedProduct);
         }
         else{
-            if (selectedProduct == COLA){
-                textWaitingForDisplay = "PRICE $1.00";
-            }
-            else{
-                textWaitingForDisplay = "PRICE $0.50";
-            }
+            textWaitingForDisplay = "PRICE " + createFormattedCurrencyDisplay(productCost);
         }
     }
     
