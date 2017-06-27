@@ -34,6 +34,10 @@ public class CoinController {
     public int getSystemBalanceInCents() {
         return systemBalanceInCents;
     }
+    
+    public void resetSystemBalanceToZero() {
+        systemBalanceInCents = 0;
+    }
 
     public void insert(Coin ... insertedCoins) {
         for (Coin currentCoin : insertedCoins){
@@ -71,6 +75,8 @@ public class CoinController {
         coinsWaitingToBeReturned.clear();
         return returnedCoins;
     }
+
+    
 
  
 

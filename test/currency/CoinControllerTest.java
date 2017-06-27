@@ -17,6 +17,8 @@ public class CoinControllerTest {
         coinController = new CoinController();
     }
 
+    //BEGIN Accept Coins Functionality Tests
+    
     @Test
     public void systemValueIsZeroCentsWithNoCoinsInserted() {
         int systemBalanceInCents = coinController.getSystemBalanceInCents();
@@ -93,6 +95,19 @@ public class CoinControllerTest {
         assertTrue(returnedCoins.isEmpty());
     }
     
+    //END Accept Coins Functionality Tests
+    
+    //BEGIN Select Product Functionality Tests
+    
+    @Test
+    public void systemBalanceZeroAfterResetting(){
+        coinController.insert(QUARTER);
+        coinController.resetSystemBalanceToZero();
+        int systemBalanceInCents = coinController.getSystemBalanceInCents();
+        assertEquals(0, systemBalanceInCents);
+    }
+    
+    //END Select Product Functionality Tests
     
     
     public static boolean coinReturnedIsAsExpected(List<Coin> returnedCoin, Coin expectedCoinType){
