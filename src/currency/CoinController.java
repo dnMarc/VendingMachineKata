@@ -73,18 +73,21 @@ public class CoinController {
     public void dispenseChange(int excessPurchaseValueInserted) {
         while (excessPurchaseValueInserted > 0){
             if (excessPurchaseValueInserted >= QUARTER_VALUE_IN_CENTS){
-                coinsWaitingToBeReturned.add(QUARTER);
-                excessPurchaseValueInserted -= QUARTER_VALUE_IN_CENTS;
+                excessPurchaseValueInserted -= dispenseCoin(QUARTER);
             }
             else if (excessPurchaseValueInserted >= DIME_VALUE_IN_CENTS){
-                coinsWaitingToBeReturned.add(DIME);
-                excessPurchaseValueInserted -= DIME_VALUE_IN_CENTS;
+                excessPurchaseValueInserted -= dispenseCoin(DIME);
             }
             else if (excessPurchaseValueInserted >= NICKEL_VALUE_IN_CENTS){
-                coinsWaitingToBeReturned.add(NICKEL);
-                excessPurchaseValueInserted -= NICKEL_VALUE_IN_CENTS;
+                excessPurchaseValueInserted -= dispenseCoin(NICKEL);
             }
         }
+    }
+    
+    private int dispenseCoin(Coin coinToBeDispensed){
+        coinsWaitingToBeReturned.add(coinToBeDispensed);
+        int valueInCentsOfDispensedCoin = coinValuesInCents.get(coinToBeDispensed);
+        return valueInCentsOfDispensedCoin;
     }
 
     public List<Coin> getCoinsToDispense() {
