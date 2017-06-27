@@ -5,9 +5,11 @@ import java.util.ArrayList;
 
 import currency.Coin;
 import currency.CoinController;
-import static vending.Product.*;
 
 public class VendingMachine {
+    
+    public static final int COLA_COST_IN_CENTS  = 100;
+    public static final int CHIPS_COST_IN_CENTS = 50;
     
     private List<Product> productsToDispense = new ArrayList<Product>();
     

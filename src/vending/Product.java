@@ -1,9 +1,11 @@
 package vending;
 
+import static vending.VendingMachine.*;
+
 public enum Product {
-    COLA(100),
+    COLA(COLA_COST_IN_CENTS),
     
-    CHIPS(50);
+    CHIPS(CHIPS_COST_IN_CENTS);
     
     private final int costInCents;
     
