@@ -16,17 +16,17 @@ public class CoinController {
     public static final int  QUARTER_VALUE_IN_CENTS      = 25;
     public static final int  NUM_COINS_INITIALLY_STOCKED = 20; 
     private int              systemBalanceInCents        = 0;
-    private int              numNickelsInStock           = NUM_COINS_INITIALLY_STOCKED;
-    private int              numDimesInStock             = NUM_COINS_INITIALLY_STOCKED;
     
     private List<Coin> coinsWaitingToBeReturned  = new ArrayList<Coin>();
     private List<Coin> acceptedCoins             = new ArrayList<Coin>();
     
-    private Map<Coin, Integer> coinValuesInCents = new HashMap<Coin, Integer>();
+    private Map<Coin, Integer> coinValuesInCents     = new HashMap<Coin, Integer>();
+    private Map<Coin, Integer> coinQuantitiesInStock = new HashMap<Coin, Integer>();
     
 
     public CoinController(){
         initializeCoinValuesInCents();
+        stockCoinInventories();
     }
 
     private void initializeCoinValuesInCents() {
@@ -34,6 +34,12 @@ public class CoinController {
         coinValuesInCents.put(DIME, DIME_VALUE_IN_CENTS);
         coinValuesInCents.put(QUARTER, QUARTER_VALUE_IN_CENTS);
         coinValuesInCents.put(PENNY, PENNY_VALUE_IN_CENTS);
+    }
+    
+    private void stockCoinInventories() {
+        coinQuantitiesInStock.put(NICKEL,  NUM_COINS_INITIALLY_STOCKED);
+        coinQuantitiesInStock.put(DIME,    NUM_COINS_INITIALLY_STOCKED);
+        coinQuantitiesInStock.put(QUARTER, NUM_COINS_INITIALLY_STOCKED);
     }
     
     public int getSystemBalanceInCents() {
@@ -77,6 +83,9 @@ public class CoinController {
     }
     
     public boolean systemInExactChangeOnlyState() {
+        int numNickelsInStock = coinQuantitiesInStock.get(NICKEL);
+        int numDimesInStock   = coinQuantitiesInStock.get(DIME);
+        
         if (numNickelsInStock >= 2 || (numNickelsInStock >= 1 && numDimesInStock >= 1)){
             return false;
         }
@@ -90,21 +99,25 @@ public class CoinController {
             }
             else if (excessPurchaseValueInserted >= DIME_VALUE_IN_CENTS){
                 excessPurchaseValueInserted -= dispenseCoin(DIME);
-                numDimesInStock--;
             }
             else if (excessPurchaseValueInserted >= NICKEL_VALUE_IN_CENTS){
                 excessPurchaseValueInserted -= dispenseCoin(NICKEL);
-                numNickelsInStock--;
             }
         }
     }
     
     private int dispenseCoin(Coin coinToBeDispensed){
         coinsWaitingToBeReturned.add(coinToBeDispensed);
+        removeCoinFromInventory(coinToBeDispensed);
         int valueInCentsOfDispensedCoin = coinValuesInCents.get(coinToBeDispensed);
         return valueInCentsOfDispensedCoin;
     }
     
+    private void removeCoinFromInventory(Coin coinTypeToRemoveFromInventory) {
+        coinQuantitiesInStock.put(coinTypeToRemoveFromInventory, 
+            coinQuantitiesInStock.get(coinTypeToRemoveFromInventory) - 1);
+    }
+
     public void manuallyReturnAllInsertedCoins() {
        for (Coin currentCoin : acceptedCoins){
            coinsWaitingToBeReturned.add(currentCoin);
