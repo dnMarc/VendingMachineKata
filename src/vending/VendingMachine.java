@@ -2,6 +2,8 @@ package vending;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
 
 import currency.Coin;
 import currency.CoinController;
@@ -13,15 +15,25 @@ public class VendingMachine {
     public static final int CHIPS_COST_IN_CENTS         = 50;
     public static final int CANDY_COST_IN_CENTS         = 65;
     public static final int NUM_UNITS_INITIALLY_STOCKED = 20;
-    private             int numChipsInStock             = NUM_UNITS_INITIALLY_STOCKED; 
-    private             int numCandyInStock             = NUM_UNITS_INITIALLY_STOCKED;
     
     private String textWaitingForDisplay = "";
     
     private List<Product> productsToDispense = new ArrayList<Product>();
     
+    private Map<Product, Integer> productQuantitiesInStock = new HashMap<Product, Integer>();
+    
     private CoinController coinManager = new CoinController();
     
+    public VendingMachine(){
+        stockAllProducts();
+    }
+    
+    private void stockAllProducts() {
+        for (Product currentProduct : Product.values()){
+            productQuantitiesInStock.put(currentProduct, NUM_UNITS_INITIALLY_STOCKED);
+        }
+    }
+
     public String checkDisplay() {
         return createSystemDisplay(coinManager.getSystemBalanceInCents());
     }
@@ -76,17 +88,8 @@ public class VendingMachine {
     public void attemptProductPurchase(Product selectedProduct, int systemBalanceInCents) {
         int productCost = selectedProduct.getCostInCents();
         if (systemBalanceInCents >= productCost){
-            if ((numChipsInStock > 0 && selectedProduct == CHIPS) || 
-                (numCandyInStock > 0 && selectedProduct == CANDY) ||
-                (selectedProduct == COLA)){
-                
+            if (productInStock(selectedProduct)){
                 completeProductPurchase(selectedProduct, systemBalanceInCents);
-                if (selectedProduct == CHIPS){
-                    numChipsInStock--;
-                }
-                else{
-                    numCandyInStock--;
-                }
             }
             else{
                 displayMessage("SOLD OUT");
@@ -96,6 +99,13 @@ public class VendingMachine {
             displayMessage("PRICE " + createFormattedCurrencyDisplay(productCost));
         }
     }
+    
+    private boolean productInStock(Product selectedProduct){
+        if (productQuantitiesInStock.get(selectedProduct) > 0){
+            return true;
+        }
+        return false;
+    }
 
     private void completeProductPurchase(Product selectedProduct, int systemBalanceInCents) {
         dispenseProduct(selectedProduct);
@@ -103,8 +113,9 @@ public class VendingMachine {
         int excessPurchaseValueInCents = calculateExcessValue(selectedProduct, systemBalanceInCents);
         coinManager.dispenseChange(excessPurchaseValueInCents);
         coinManager.resetSystemBalanceToZero();
+        removeProductFromInventory(selectedProduct);
     }
-    
+
     private void dispenseProduct(Product productToDispense){
         productsToDispense.add(productToDispense);
     }
@@ -116,6 +127,10 @@ public class VendingMachine {
     public int calculateExcessValue(Product selectedProduct, int valueInCentsUsedForPurchase) {
         int productCostInCents = selectedProduct.getCostInCents();
         return valueInCentsUsedForPurchase - productCostInCents;
+    }
+    
+    private void removeProductFromInventory(Product selectedProduct) {
+        productQuantitiesInStock.put(selectedProduct, productQuantitiesInStock.get(selectedProduct) - 1);
     }
     
     public List<Product> checkProductReturn() {
