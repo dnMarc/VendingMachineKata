@@ -10,6 +10,7 @@ import vending.VendingMachine;
 import currency.Coin;
 import static currency.Coin.*;
 import static currency.CoinControllerTest.*;
+import static vending.VendingMachine.*;
 
 public class IntegrationTests {
     
@@ -202,6 +203,20 @@ public class IntegrationTests {
     
     //END Return Coins Functionality Tests
     
+    //BEGIN Sold Out Functionality Tests
+    
+    @Test 
+    public void systemBalanceUnchangedByFailedPurchaseAttemptOfSoldOutItem(){
+        for (int i = 0; i < NUM_UNITS_INITIALLY_STOCKED + 1; i++){
+            vendingMachine.insert(QUARTER, QUARTER);
+            vendingMachine.attemptChipsPurchase();
+        }
+        vendingMachine.checkDisplay();
+        String displayStatus = vendingMachine.checkDisplay();
+        assertEquals("$0.50", displayStatus);
+    }
+    
+  //END Sold Out Functionality Tests
 
 
 }
