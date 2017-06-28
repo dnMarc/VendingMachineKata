@@ -165,6 +165,17 @@ public class VendingMachineTest {
         assertEquals("SOLD OUT", displayStatus);
     }
     
+    @Test
+    public void displayThankYouWhenCandyPurchaseAttemptedWithChipsSoldOut(){
+        for (int i = 0; i < NUM_UNITS_INITIALLY_STOCKED; i++){
+            vendingMachine.attemptProductPurchase(CHIPS, SUFFICIENT_VALUE_FOR_ANY_PURCHASE);
+        }
+        vendingMachine.attemptProductPurchase(CANDY, SUFFICIENT_VALUE_FOR_ANY_PURCHASE);
+        String displayStatus = vendingMachine.createSystemDisplay(ZERO_VALUE_SYSTEM_BALANCE);
+        assertEquals("THANK YOU", displayStatus);
+    }
+    
+    
     
     
     private boolean productReturnedIsAsExpected(List<Product> dispensedProduct, Product expectedProductType){

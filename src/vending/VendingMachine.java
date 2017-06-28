@@ -75,14 +75,13 @@ public class VendingMachine {
     public void attemptProductPurchase(Product selectedProduct, int systemBalanceInCents) {
         int productCost = selectedProduct.getCostInCents();
         if (systemBalanceInCents >= productCost){
-            if (numChipsInStock > 0){
+            if ((numChipsInStock > 0 && selectedProduct == CHIPS) || selectedProduct != CHIPS){
                 completeProductPurchase(selectedProduct, systemBalanceInCents);
                 numChipsInStock--;
             }
             else{
                 displayMessage("SOLD OUT");
             }
-            
         }
         else{
             displayMessage("PRICE " + createFormattedCurrencyDisplay(productCost));
