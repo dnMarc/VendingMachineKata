@@ -214,9 +214,19 @@ public class CoinControllerTest {
     
     @Test
     public void systemInExactChangeOnlyStateWhenNoNickelsInInventory(){
-        for (int i = 0; i < 20; i++){
+        for (int i = 0; i < NUM_COINS_INITIALLY_STOCKED; i++){
             coinController.dispenseChange(NICKEL_VALUE_IN_CENTS);
         }
+        boolean exactChangeOnlyState = coinController.systemInExactChangeOnlyState();
+        assertTrue(exactChangeOnlyState);
+    }
+    
+    @Test
+    public void systemInExactChangeOnlyStateWithOneNickelZeroDimesInInventory(){
+        for (int i = 0; i < NUM_COINS_INITIALLY_STOCKED - 1; i++){
+            coinController.dispenseChange(NICKEL_VALUE_IN_CENTS + DIME_VALUE_IN_CENTS);
+        }
+        coinController.dispenseChange(DIME_VALUE_IN_CENTS);
         boolean exactChangeOnlyState = coinController.systemInExactChangeOnlyState();
         assertTrue(exactChangeOnlyState);
     }

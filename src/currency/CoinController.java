@@ -17,11 +17,13 @@ public class CoinController {
     public static final int  NUM_COINS_INITIALLY_STOCKED = 20; 
     private int              systemBalanceInCents        = 0;
     private int              numNickelsInStock           = NUM_COINS_INITIALLY_STOCKED;
+    private int              numDimesInStock             = NUM_COINS_INITIALLY_STOCKED;
     
     private List<Coin> coinsWaitingToBeReturned  = new ArrayList<Coin>();
     private List<Coin> acceptedCoins             = new ArrayList<Coin>();
     
     private Map<Coin, Integer> coinValuesInCents = new HashMap<Coin, Integer>();
+    
 
     public CoinController(){
         initializeCoinValuesInCents();
@@ -75,7 +77,7 @@ public class CoinController {
     }
     
     public boolean systemInExactChangeOnlyState() {
-        if (numNickelsInStock >= 2){
+        if (numNickelsInStock >= 2 || (numNickelsInStock >= 1 && numDimesInStock >= 1)){
             return false;
         }
         return true;
@@ -88,6 +90,7 @@ public class CoinController {
             }
             else if (excessPurchaseValueInserted >= DIME_VALUE_IN_CENTS){
                 excessPurchaseValueInserted -= dispenseCoin(DIME);
+                numDimesInStock--;
             }
             else if (excessPurchaseValueInserted >= NICKEL_VALUE_IN_CENTS){
                 excessPurchaseValueInserted -= dispenseCoin(NICKEL);
