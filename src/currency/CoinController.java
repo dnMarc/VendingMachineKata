@@ -82,6 +82,14 @@ public class CoinController {
         return false;
     }
     
+    public void processCoinTransactions(int excessPurchaseValueInserted){
+        boolean exactChangeOnlyState = systemInExactChangeOnlyState();
+        addAcceptedCoinsToCoinInventory();
+        if (!exactChangeOnlyState){
+            dispenseChange(excessPurchaseValueInserted);
+        }
+    }
+    
     public boolean systemInExactChangeOnlyState() {
         int numNickelsInStock = coinQuantitiesInStock.get(NICKEL);
         int numDimesInStock   = coinQuantitiesInStock.get(DIME);
@@ -92,10 +100,13 @@ public class CoinController {
         return true;
     }
     
-    public void dispenseChange(int excessPurchaseValueInserted) {
+    private void addAcceptedCoinsToCoinInventory() {
         for (Coin currentCoin : acceptedCoins){
             coinQuantitiesInStock.put(currentCoin, coinQuantitiesInStock.get(currentCoin) + 1);
         }
+    }
+
+    public void dispenseChange(int excessPurchaseValueInserted) {
         while (excessPurchaseValueInserted > 0 && coinTypeInStock(NICKEL)){
             if (excessPurchaseValueInserted >= QUARTER_VALUE_IN_CENTS && coinTypeInStock(QUARTER)){
                 excessPurchaseValueInserted -= dispenseCoin(QUARTER);

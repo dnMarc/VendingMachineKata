@@ -270,7 +270,7 @@ public class CoinControllerTest {
     public void depleteCoinTypeNumTimes(Coin coinTypeToDispense, int numTimesToDispense){
         int coinValueInCents = coinController.getCoinValueInCents(coinTypeToDispense);
         for (int i = 0; i < numTimesToDispense; i++){
-            coinController.dispenseChange(coinValueInCents);
+            coinController.processCoinTransactions(coinValueInCents);
         }
     }
     
