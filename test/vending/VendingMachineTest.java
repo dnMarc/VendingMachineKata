@@ -158,7 +158,7 @@ public class VendingMachineTest {
     
     @Test
     public void displaySoldOutWhenChipsPurchaseAttemptedWithChipsSoldOut(){
-        for (int i = 0; i < 21; i++){
+        for (int i = 0; i < NUM_UNITS_INITIALLY_STOCKED + 1; i++){
             vendingMachine.attemptProductPurchase(CHIPS, SUFFICIENT_VALUE_FOR_ANY_PURCHASE);
         }
         String displayStatus = vendingMachine.createSystemDisplay(SUFFICIENT_VALUE_FOR_ANY_PURCHASE);

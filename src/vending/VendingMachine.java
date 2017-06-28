@@ -9,10 +9,11 @@ import static vending.Product.*;
 
 public class VendingMachine {
     
-    public static final int COLA_COST_IN_CENTS  = 100;
-    public static final int CHIPS_COST_IN_CENTS = 50;
-    public static final int CANDY_COST_IN_CENTS = 65;
-    private             int numChipsInStock     = 20; 
+    public static final int COLA_COST_IN_CENTS          = 100;
+    public static final int CHIPS_COST_IN_CENTS         = 50;
+    public static final int CANDY_COST_IN_CENTS         = 65;
+    public static final int NUM_UNITS_INITIALLY_STOCKED = 20;
+    private             int numChipsInStock             = NUM_UNITS_INITIALLY_STOCKED; 
     
     private String textWaitingForDisplay = "";
     
