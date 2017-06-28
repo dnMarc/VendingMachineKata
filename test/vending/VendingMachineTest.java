@@ -202,6 +202,14 @@ public class VendingMachineTest {
         assertEquals("INSERT COIN", displayStatus);
     }
     
+    @Test
+    public void displayBalanceAfterSoldOutWithPositiveSystemBalance(){
+        purchaseProductNumTimes(COLA, NUM_UNITS_INITIALLY_STOCKED + 1);
+        vendingMachine.createSystemDisplay(SUFFICIENT_VALUE_FOR_ANY_PURCHASE);
+        String displayStatus = vendingMachine.createSystemDisplay(SUFFICIENT_VALUE_FOR_ANY_PURCHASE);
+        assertEquals("$1.00", displayStatus);
+    }
+    
     
     
     
