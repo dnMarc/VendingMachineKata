@@ -214,36 +214,37 @@ public class CoinControllerTest {
     
     @Test
     public void systemInExactChangeOnlyStateWhenNoNickelsInInventory(){
-        for (int i = 0; i < NUM_COINS_INITIALLY_STOCKED; i++){
-            coinController.dispenseChange(NICKEL_VALUE_IN_CENTS);
-        }
+        depleteCoinTypeNumTimes(NICKEL, NUM_COINS_INITIALLY_STOCKED);
         boolean exactChangeOnlyState = coinController.systemInExactChangeOnlyState();
         assertTrue(exactChangeOnlyState);
     }
     
     @Test
     public void systemInExactChangeOnlyStateWithOneNickelZeroDimesInInventory(){
-        for (int i = 0; i < NUM_COINS_INITIALLY_STOCKED - 1; i++){
-            coinController.dispenseChange(NICKEL_VALUE_IN_CENTS + DIME_VALUE_IN_CENTS);
-        }
-        coinController.dispenseChange(DIME_VALUE_IN_CENTS);
+        depleteCoinTypeNumTimes(NICKEL, NUM_COINS_INITIALLY_STOCKED - 1);
+        depleteCoinTypeNumTimes(DIME, NUM_COINS_INITIALLY_STOCKED);
         boolean exactChangeOnlyState = coinController.systemInExactChangeOnlyState();
         assertTrue(exactChangeOnlyState);
     }
     
     @Test
     public void zeroNickelsDispensedAsChangeWhenNickelsOutOfStock(){
-        for (int i = 0; i < NUM_COINS_INITIALLY_STOCKED; i++){
-            coinController.dispenseChange(NICKEL_VALUE_IN_CENTS);
-        }
+        depleteCoinTypeNumTimes(NICKEL, NUM_COINS_INITIALLY_STOCKED);
         coinController.getCoinsToDispense();
-        coinController.dispenseChange(NICKEL_VALUE_IN_CENTS);
+        depleteCoinTypeNumTimes(NICKEL, 1);
         List<Coin> returnedCoins = coinController.getCoinsToDispense();
         assertTrue(returnedCoins.isEmpty());
     }
     
     
     
+    
+    public void depleteCoinTypeNumTimes(Coin coinTypeToDispense, int numTimesToDispense){
+        int coinValueInCents = coinController.getCoinValueInCents(coinTypeToDispense);
+        for (int i = 0; i < numTimesToDispense; i++){
+            coinController.dispenseChange(coinValueInCents);
+        }
+    }
     
     
     public static boolean coinsReturnedAreAsExpected(List<Coin> returnedCoins, Coin ... expectedCoinTypes ){

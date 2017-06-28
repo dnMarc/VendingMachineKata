@@ -20,8 +20,8 @@ public class CoinController {
     private List<Coin> coinsWaitingToBeReturned  = new ArrayList<Coin>();
     private List<Coin> acceptedCoins             = new ArrayList<Coin>();
     
-    private Map<Coin, Integer> coinValuesInCents     = new HashMap<Coin, Integer>();
-    private Map<Coin, Integer> coinQuantitiesInStock = new HashMap<Coin, Integer>();
+    private Map<Coin, Integer>       coinValuesInCents     = new HashMap<Coin, Integer>();
+    private Map<Coin, Integer>       coinQuantitiesInStock = new HashMap<Coin, Integer>();
     
 
     public CoinController(){
@@ -130,6 +130,10 @@ public class CoinController {
         List<Coin> returnedCoins = new ArrayList<Coin>(coinsWaitingToBeReturned);
         coinsWaitingToBeReturned.clear();
         return returnedCoins;
+    }
+    
+    public int getCoinValueInCents(Coin coin){
+        return coinValuesInCents.get(coin);
     }
 
 
