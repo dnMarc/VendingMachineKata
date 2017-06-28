@@ -158,25 +158,27 @@ public class VendingMachineTest {
     
     @Test
     public void displaySoldOutWhenChipsPurchaseAttemptedWithChipsSoldOut(){
-        for (int i = 0; i < NUM_UNITS_INITIALLY_STOCKED + 1; i++){
-            vendingMachine.attemptProductPurchase(CHIPS, SUFFICIENT_VALUE_FOR_ANY_PURCHASE);
-        }
+        purchaseProductNumTimes(CHIPS, NUM_UNITS_INITIALLY_STOCKED + 1);
         String displayStatus = vendingMachine.createSystemDisplay(SUFFICIENT_VALUE_FOR_ANY_PURCHASE);
         assertEquals("SOLD OUT", displayStatus);
     }
     
     @Test
     public void displayThankYouWhenCandyPurchaseAttemptedWithChipsSoldOut(){
-        for (int i = 0; i < NUM_UNITS_INITIALLY_STOCKED; i++){
-            vendingMachine.attemptProductPurchase(CHIPS, SUFFICIENT_VALUE_FOR_ANY_PURCHASE);
-        }
-        vendingMachine.attemptProductPurchase(CANDY, SUFFICIENT_VALUE_FOR_ANY_PURCHASE);
+        purchaseProductNumTimes(CHIPS, NUM_UNITS_INITIALLY_STOCKED);
+        purchaseProductNumTimes(CANDY, 1);
         String displayStatus = vendingMachine.createSystemDisplay(ZERO_VALUE_SYSTEM_BALANCE);
         assertEquals("THANK YOU", displayStatus);
     }
     
     
     
+    
+    private void purchaseProductNumTimes(Product productToPurchase, int numTimesToPurchase){
+        for (int i = 0; i < numTimesToPurchase; i++){
+            vendingMachine.attemptProductPurchase(productToPurchase, SUFFICIENT_VALUE_FOR_ANY_PURCHASE);
+        }
+    }
     
     private boolean productReturnedIsAsExpected(List<Product> dispensedProduct, Product expectedProductType){
         if (dispensedProduct.size() == 1){
