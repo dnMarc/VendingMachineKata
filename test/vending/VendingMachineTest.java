@@ -210,6 +210,15 @@ public class VendingMachineTest {
         assertEquals("$1.00", displayStatus);
     }
     
+    @Test
+    public void colaNotDispensedWhenSoldOut(){
+        purchaseProductNumTimes(COLA, NUM_UNITS_INITIALLY_STOCKED);
+        vendingMachine.checkProductReturn();
+        purchaseProductNumTimes(COLA, 1);
+        List<Product> dispensedProducts = vendingMachine.checkProductReturn();
+        assertTrue(dispensedProducts.isEmpty());
+    }
+    
     
     
     
