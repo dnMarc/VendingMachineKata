@@ -237,6 +237,17 @@ public class VendingMachineTest {
         assertTrue(dispensedProducts.isEmpty());
     }
     
+    @Test
+    public void candyDispensedWhenChipsSoldOut(){
+        purchaseProductNumTimes(CHIPS, NUM_UNITS_INITIALLY_STOCKED);
+        vendingMachine.checkProductReturn();
+        purchaseProductNumTimes(CANDY, 1);
+        List<Product> dispensedProducts = vendingMachine.checkProductReturn();
+        assertTrue(productReturnedIsAsExpected(dispensedProducts, CANDY));
+    }
+  
+    //END Sold Out Functionality Tests
+    
     
     
     
