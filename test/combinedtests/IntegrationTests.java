@@ -231,6 +231,18 @@ public class IntegrationTests {
         String displayStatus = vendingMachine.checkDisplay();
         assertEquals("EXACT CHANGE ONLY", displayStatus);
     }
+    
+    @Test
+    public void systemDisplaysExactChangeOnlyWhenExcessiveNonExactChangeUsedForColaPurchase(){
+        for (int i = 0; i < NUM_COINS_INITIALLY_STOCKED; i++){
+            vendingMachine.insert(QUARTER, QUARTER, DIME, DIME);
+            vendingMachine.attemptCandyPurchase();
+        }
+        vendingMachine.insert(QUARTER, QUARTER, QUARTER, QUARTER, DIME);
+        vendingMachine.attemptColaPurchase();
+        String displayStatus = vendingMachine.checkDisplay();
+        assertEquals("EXACT CHANGE ONLY", displayStatus);
+    }
 
 
 }

@@ -78,7 +78,8 @@ public class VendingMachine {
     }
     
     public void attemptColaPurchase() {
-        attemptProductPurchase(COLA,    coinManager.getSystemBalanceInCents(), false);
+        attemptProductPurchase(COLA,    coinManager.getSystemBalanceInCents(), 
+            coinManager.systemInExactChangeOnlyState());
     }
     
     public void attemptChipsPurchase() {
