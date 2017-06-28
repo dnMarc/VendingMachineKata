@@ -178,6 +178,13 @@ public class VendingMachineTest {
         assertEquals("SOLD OUT", displayStatus);
     }
     
+    @Test
+    public void displaySoldOutWhenColaPurchaseAttemptedWithColaSoldOut(){
+        purchaseProductNumTimes(COLA, NUM_UNITS_INITIALLY_STOCKED + 1);
+        String displayStatus = vendingMachine.createSystemDisplay(SUFFICIENT_VALUE_FOR_ANY_PURCHASE);
+        assertEquals("SOLD OUT", displayStatus);
+    }
+    
     
     
     
