@@ -263,6 +263,13 @@ public class VendingMachineTest {
         assertEquals("EXACT CHANGE ONLY", displayStatus);
     }
     
+    @Test
+    public void exactChangeOnlyPurchaseFailsWithSurplusValue(){
+        vendingMachine.attemptProductPurchase(CANDY, CANDY_COST_IN_CENTS + 10, true);
+        List<Product> dispensedProducts = vendingMachine.checkProductReturn();
+        assertTrue(dispensedProducts.isEmpty());
+    }
+    
     
     
     
