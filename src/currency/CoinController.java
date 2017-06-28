@@ -10,12 +10,13 @@ import static currency.Coin.*;
 
 public class CoinController {
     
-    private static final int PENNY_VALUE_IN_CENTS   = 0;
-    public static final int  NICKEL_VALUE_IN_CENTS  = 5;
-    public static final int  DIME_VALUE_IN_CENTS    = 10;
-    public static final int  QUARTER_VALUE_IN_CENTS = 25;
-    private int              systemBalanceInCents   = 0;
-    private int              numNickelsInStock      = 20;
+    private static final int PENNY_VALUE_IN_CENTS        = 0;
+    public static final int  NICKEL_VALUE_IN_CENTS       = 5;
+    public static final int  DIME_VALUE_IN_CENTS         = 10;
+    public static final int  QUARTER_VALUE_IN_CENTS      = 25;
+    public static final int  NUM_COINS_INITIALLY_STOCKED = 20; 
+    private int              systemBalanceInCents        = 0;
+    private int              numNickelsInStock           = NUM_COINS_INITIALLY_STOCKED;
     
     private List<Coin> coinsWaitingToBeReturned  = new ArrayList<Coin>();
     private List<Coin> acceptedCoins             = new ArrayList<Coin>();
