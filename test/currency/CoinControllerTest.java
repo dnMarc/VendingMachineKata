@@ -254,6 +254,16 @@ public class CoinControllerTest {
         assertTrue(coinsReturnedAreAsExpected(returnedCoins, DIME, DIME, NICKEL));
     }
     
+    @Test
+    public void insertedCoinsAreAddedToCoinInventory(){
+        depleteCoinTypeNumTimes(QUARTER, NUM_COINS_INITIALLY_STOCKED);
+        coinController.getCoinsToDispense();
+        coinController.insert(QUARTER);
+        depleteCoinTypeNumTimes(QUARTER, 1);
+        List<Coin> returnedCoins = coinController.getCoinsToDispense();
+        assertTrue(coinsReturnedAreAsExpected(returnedCoins, QUARTER));
+    }
+    
     
     
     
