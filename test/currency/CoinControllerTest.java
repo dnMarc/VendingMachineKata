@@ -231,6 +231,17 @@ public class CoinControllerTest {
         assertTrue(exactChangeOnlyState);
     }
     
+    @Test
+    public void zeroNickelsDispensedAsChangeWhenNickelsOutOfStock(){
+        for (int i = 0; i < NUM_COINS_INITIALLY_STOCKED; i++){
+            coinController.dispenseChange(NICKEL_VALUE_IN_CENTS);
+        }
+        coinController.getCoinsToDispense();
+        coinController.dispenseChange(NICKEL_VALUE_IN_CENTS);
+        List<Coin> returnedCoins = coinController.getCoinsToDispense();
+        assertTrue(returnedCoins.isEmpty());
+    }
+    
     
     
     
