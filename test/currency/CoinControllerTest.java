@@ -236,6 +236,15 @@ public class CoinControllerTest {
         assertTrue(returnedCoins.isEmpty());
     }
     
+    @Test
+    public void zeroDimesDispensedAsChangeWhenDimesOutOfStock(){
+        depleteCoinTypeNumTimes(DIME, NUM_COINS_INITIALLY_STOCKED);
+        coinController.getCoinsToDispense();
+        depleteCoinTypeNumTimes(DIME, 1);
+        List<Coin> returnedCoins = coinController.getCoinsToDispense();
+        assertTrue(coinsReturnedAreAsExpected(returnedCoins, NICKEL, NICKEL));
+    }
+    
     
     
     

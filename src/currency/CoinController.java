@@ -97,7 +97,7 @@ public class CoinController {
             if (excessPurchaseValueInserted >= QUARTER_VALUE_IN_CENTS){
                 excessPurchaseValueInserted -= dispenseCoin(QUARTER);
             }
-            else if (excessPurchaseValueInserted >= DIME_VALUE_IN_CENTS){
+            else if (excessPurchaseValueInserted >= DIME_VALUE_IN_CENTS && coinQuantitiesInStock.get(DIME) > 0){
                 excessPurchaseValueInserted -= dispenseCoin(DIME);
             }
             else if (excessPurchaseValueInserted >= NICKEL_VALUE_IN_CENTS){
