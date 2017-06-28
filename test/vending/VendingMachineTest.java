@@ -154,6 +154,18 @@ public class VendingMachineTest {
     
     //END Make Change Functionality Tests
     
+    //BEGIN Sold Out Functionality Tests
+    
+    @Test
+    public void displaySoldOutWhenChipsPurchaseAttemptedWithChipsSoldOut(){
+        for (int i = 0; i < 21; i++){
+            vendingMachine.attemptProductPurchase(CHIPS, SUFFICIENT_VALUE_FOR_ANY_PURCHASE);
+        }
+        String displayStatus = vendingMachine.createSystemDisplay(SUFFICIENT_VALUE_FOR_ANY_PURCHASE);
+        assertEquals("SOLD OUT", displayStatus);
+    }
+    
+    
     
     private boolean productReturnedIsAsExpected(List<Product> dispensedProduct, Product expectedProductType){
         if (dispensedProduct.size() == 1){

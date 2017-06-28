@@ -12,6 +12,7 @@ public class VendingMachine {
     public static final int COLA_COST_IN_CENTS  = 100;
     public static final int CHIPS_COST_IN_CENTS = 50;
     public static final int CANDY_COST_IN_CENTS = 65;
+    private             int numChipsInStock     = 20; 
     
     private String textWaitingForDisplay = "";
     
@@ -73,7 +74,14 @@ public class VendingMachine {
     public void attemptProductPurchase(Product selectedProduct, int systemBalanceInCents) {
         int productCost = selectedProduct.getCostInCents();
         if (systemBalanceInCents >= productCost){
-            completeProductPurchase(selectedProduct, systemBalanceInCents);
+            if (numChipsInStock > 0){
+                completeProductPurchase(selectedProduct, systemBalanceInCents);
+                numChipsInStock--;
+            }
+            else{
+                displayMessage("SOLD OUT");
+            }
+            
         }
         else{
             displayMessage("PRICE " + createFormattedCurrencyDisplay(productCost));
