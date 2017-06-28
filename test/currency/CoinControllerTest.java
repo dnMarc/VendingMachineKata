@@ -264,6 +264,17 @@ public class CoinControllerTest {
         assertTrue(coinsReturnedAreAsExpected(returnedCoins, QUARTER));
     }
     
+    @Test
+    public void insertedCoinsAreAddedToCoinInventoryOnlyOnce(){
+        coinController.insert(QUARTER);
+        depleteCoinTypeNumTimes(QUARTER, NUM_COINS_INITIALLY_STOCKED + 1);
+        coinController.getCoinsToDispense();
+        depleteCoinTypeNumTimes(QUARTER, 1);
+        List<Coin> returnedCoins = coinController.getCoinsToDispense();
+        assertTrue(coinsReturnedAreAsExpected(returnedCoins, DIME, DIME, NICKEL));
+    }
+    
+    //END Exact Change Only Functionality Tests
     
     
     

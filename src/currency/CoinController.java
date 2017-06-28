@@ -104,6 +104,7 @@ public class CoinController {
         for (Coin currentCoin : acceptedCoins){
             coinQuantitiesInStock.put(currentCoin, coinQuantitiesInStock.get(currentCoin) + 1);
         }
+        acceptedCoins.clear();
     }
 
     public void dispenseChange(int excessPurchaseValueInserted) {
