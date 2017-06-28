@@ -77,22 +77,28 @@ public class VendingMachine {
     }
     
     public void attemptColaPurchase() {
-        attemptProductPurchase(COLA,    coinManager.getSystemBalanceInCents());
+        attemptProductPurchase(COLA,    coinManager.getSystemBalanceInCents(), false);
     }
     
     public void attemptChipsPurchase() {
-        attemptProductPurchase(CHIPS,   coinManager.getSystemBalanceInCents());
+        attemptProductPurchase(CHIPS,   coinManager.getSystemBalanceInCents(), false);
     }
     
     public void attemptCandyPurchase() {
-        attemptProductPurchase(CANDY,   coinManager.getSystemBalanceInCents());
+        attemptProductPurchase(CANDY,   coinManager.getSystemBalanceInCents(), false);
     }
 
-    public void attemptProductPurchase(Product selectedProduct, int systemBalanceInCents) {
+    public void attemptProductPurchase(Product selectedProduct, int systemBalanceInCents, 
+            boolean exactChangeOnlyState) {
         if (productInStock(selectedProduct)){
             int productCost = selectedProduct.getCostInCents();
             if (systemBalanceInCents >= productCost){
-                completeProductPurchase(selectedProduct, systemBalanceInCents);
+                if (exactChangeOnlyState && systemBalanceInCents > productCost){
+                    displayMessage("EXACT CHANGE ONLY");
+                }
+                else{
+                    completeProductPurchase(selectedProduct, systemBalanceInCents);
+                }
             }
             else{
                 displayMessage("PRICE " + createFormattedCurrencyDisplay(productCost));
