@@ -245,6 +245,15 @@ public class CoinControllerTest {
         assertTrue(coinsReturnedAreAsExpected(returnedCoins, NICKEL, NICKEL));
     }
     
+    @Test
+    public void zeroQuartersDispensedAsChangeWhenQuartersOutOfStock(){
+        depleteCoinTypeNumTimes(QUARTER, NUM_COINS_INITIALLY_STOCKED);
+        coinController.getCoinsToDispense();
+        depleteCoinTypeNumTimes(QUARTER, 1);
+        List<Coin> returnedCoins = coinController.getCoinsToDispense();
+        assertTrue(coinsReturnedAreAsExpected(returnedCoins, DIME, DIME, NICKEL));
+    }
+    
     
     
     
