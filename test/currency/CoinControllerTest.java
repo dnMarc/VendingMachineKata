@@ -212,6 +212,15 @@ public class CoinControllerTest {
         assertFalse(exactChangeOnlyState);
     }
     
+    @Test
+    public void systemInExactChangeOnlyStateWhenNoNickelsInInventory(){
+        for (int i = 0; i < 20; i++){
+            coinController.dispenseChange(NICKEL_VALUE_IN_CENTS);
+        }
+        boolean exactChangeOnlyState = coinController.systemInExactChangeOnlyState();
+        assertTrue(exactChangeOnlyState);
+    }
+    
     
     
     

@@ -11,10 +11,11 @@ import static currency.Coin.*;
 public class CoinController {
     
     private static final int PENNY_VALUE_IN_CENTS   = 0;
-    public static final int NICKEL_VALUE_IN_CENTS  = 5;
-    public static final int DIME_VALUE_IN_CENTS    = 10;
-    public static final int QUARTER_VALUE_IN_CENTS = 25;
-    private int systemBalanceInCents = 0;
+    public static final int  NICKEL_VALUE_IN_CENTS  = 5;
+    public static final int  DIME_VALUE_IN_CENTS    = 10;
+    public static final int  QUARTER_VALUE_IN_CENTS = 25;
+    private int              systemBalanceInCents   = 0;
+    private int              numNickelsInStock      = 20;
     
     private List<Coin> coinsWaitingToBeReturned  = new ArrayList<Coin>();
     private List<Coin> acceptedCoins             = new ArrayList<Coin>();
@@ -73,7 +74,10 @@ public class CoinController {
     }
     
     public boolean systemInExactChangeOnlyState() {
-        return false;
+        if (numNickelsInStock >= 2){
+            return false;
+        }
+        return true;
     }
     
     public void dispenseChange(int excessPurchaseValueInserted) {
@@ -86,6 +90,7 @@ public class CoinController {
             }
             else if (excessPurchaseValueInserted >= NICKEL_VALUE_IN_CENTS){
                 excessPurchaseValueInserted -= dispenseCoin(NICKEL);
+                numNickelsInStock--;
             }
         }
     }
