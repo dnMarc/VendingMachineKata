@@ -270,6 +270,14 @@ public class VendingMachineTest {
         assertTrue(dispensedProducts.isEmpty());
     }
     
+    @Test
+    public void exactChangeOnlyPurchaseSucceedsWithExactValue(){
+        vendingMachine.attemptProductPurchase(CANDY, CANDY_COST_IN_CENTS, true);
+        List<Product> dispensedProducts = vendingMachine.checkProductReturn();
+        assertTrue(productReturnedIsAsExpected(dispensedProducts, CANDY));
+    }
+    
+    //END Exact Change Only Functionality Tests
     
     
     
