@@ -24,25 +24,25 @@ public class VendingMachineTest {
     
     @Test
     public void displayInsertCoinWithZeroSystemValue() {
-        String displayStatus = vendingMachine.createSystemDisplay(0);
+        String displayStatus = vendingMachine.createSystemDisplay(0, false);
         assertEquals("INSERT COIN", displayStatus);
     }
     
     @Test
     public void displaySystemBalanceLessThanTenCents(){
-        String displayStatus = vendingMachine.createSystemDisplay(5);
+        String displayStatus = vendingMachine.createSystemDisplay(5, false);
         assertEquals("$0.05", displayStatus);
     }
     
     @Test
     public void displaySystemBalanceLessThanOneDollar(){
-        String displayStatus = vendingMachine.createSystemDisplay(15);
+        String displayStatus = vendingMachine.createSystemDisplay(15, false);
         assertEquals("$0.15", displayStatus);
     }
     
     @Test
     public void displaySystemBalanceGreaterThanNinetyNineCents(){
-        String displayStatus = vendingMachine.createSystemDisplay(127);
+        String displayStatus = vendingMachine.createSystemDisplay(127, false);
         assertEquals("$1.27", displayStatus);
     }
     
@@ -95,44 +95,44 @@ public class VendingMachineTest {
     @Test
     public void displayPriceWhenColaPurchaseAttemptedWithInsufficientValue(){
     	vendingMachine.attemptProductPurchase(COLA, ZERO_VALUE_SYSTEM_BALANCE);
-    	String displayStatus = vendingMachine.createSystemDisplay(ZERO_VALUE_SYSTEM_BALANCE);
+    	String displayStatus = vendingMachine.createSystemDisplay(ZERO_VALUE_SYSTEM_BALANCE, false);
     	assertEquals("PRICE $1.00", displayStatus);
     }
     
     @Test
     public void displayPriceWhenChipsPurchaseAttemptedWithInsufficientValue(){
         vendingMachine.attemptProductPurchase(CHIPS, ZERO_VALUE_SYSTEM_BALANCE);
-        String displayStatus = vendingMachine.createSystemDisplay(ZERO_VALUE_SYSTEM_BALANCE);
+        String displayStatus = vendingMachine.createSystemDisplay(ZERO_VALUE_SYSTEM_BALANCE, false);
         assertEquals("PRICE $0.50", displayStatus);
     }
     
     @Test
     public void displayPriceWhenCandyPurchaseAttemptedWithInsufficientValue(){
         vendingMachine.attemptProductPurchase(CANDY, ZERO_VALUE_SYSTEM_BALANCE);
-        String displayStatus = vendingMachine.createSystemDisplay(ZERO_VALUE_SYSTEM_BALANCE);
+        String displayStatus = vendingMachine.createSystemDisplay(ZERO_VALUE_SYSTEM_BALANCE, false);
         assertEquals("PRICE $0.65", displayStatus);
     }
     
     @Test
     public void displayInsertCoinAfterPriceWithEmptySystemBalance(){
         vendingMachine.attemptProductPurchase(CANDY, ZERO_VALUE_SYSTEM_BALANCE);
-        vendingMachine.createSystemDisplay(ZERO_VALUE_SYSTEM_BALANCE);
-        String displayStatus = vendingMachine.createSystemDisplay(ZERO_VALUE_SYSTEM_BALANCE);
+        vendingMachine.createSystemDisplay(ZERO_VALUE_SYSTEM_BALANCE, false);
+        String displayStatus = vendingMachine.createSystemDisplay(ZERO_VALUE_SYSTEM_BALANCE, false);
         assertEquals("INSERT COIN", displayStatus);
     }
     
     @Test
     public void displayBalanceAfterPriceWithInsufficientSystemBalance(){
         vendingMachine.attemptProductPurchase(CANDY, CANDY_COST_IN_CENTS - 10);
-        vendingMachine.createSystemDisplay(CANDY_COST_IN_CENTS - 10);
-        String displayStatus = vendingMachine.createSystemDisplay(CANDY_COST_IN_CENTS - 10);
+        vendingMachine.createSystemDisplay(CANDY_COST_IN_CENTS - 10, false);
+        String displayStatus = vendingMachine.createSystemDisplay(CANDY_COST_IN_CENTS - 10, false);
         assertEquals("$0.55", displayStatus);
     }
     
     @Test
     public void displayThankYouAfterSuccessfulProductPurchase(){
         vendingMachine.attemptProductPurchase(COLA, SUFFICIENT_VALUE_FOR_ANY_PURCHASE);
-        String displayStatus = vendingMachine.createSystemDisplay(ZERO_VALUE_SYSTEM_BALANCE);
+        String displayStatus = vendingMachine.createSystemDisplay(ZERO_VALUE_SYSTEM_BALANCE, false);
         assertEquals("THANK YOU", displayStatus);
     }
     
@@ -159,7 +159,7 @@ public class VendingMachineTest {
     @Test
     public void displaySoldOutWhenChipsPurchaseAttemptedWithChipsSoldOut(){
         purchaseProductNumTimes(CHIPS, NUM_UNITS_INITIALLY_STOCKED + 1);
-        String displayStatus = vendingMachine.createSystemDisplay(SUFFICIENT_VALUE_FOR_ANY_PURCHASE);
+        String displayStatus = vendingMachine.createSystemDisplay(SUFFICIENT_VALUE_FOR_ANY_PURCHASE, false);
         assertEquals("SOLD OUT", displayStatus);
     }
     
@@ -167,21 +167,21 @@ public class VendingMachineTest {
     public void displayThankYouWhenCandyPurchaseAttemptedWithChipsSoldOut(){
         purchaseProductNumTimes(CHIPS, NUM_UNITS_INITIALLY_STOCKED);
         purchaseProductNumTimes(CANDY, 1);
-        String displayStatus = vendingMachine.createSystemDisplay(ZERO_VALUE_SYSTEM_BALANCE);
+        String displayStatus = vendingMachine.createSystemDisplay(ZERO_VALUE_SYSTEM_BALANCE, false);
         assertEquals("THANK YOU", displayStatus);
     }
     
     @Test
     public void displaySoldOutWhenCandyPurchaseAttemptedWithCandySoldOut(){
         purchaseProductNumTimes(CANDY, NUM_UNITS_INITIALLY_STOCKED + 1);
-        String displayStatus = vendingMachine.createSystemDisplay(SUFFICIENT_VALUE_FOR_ANY_PURCHASE);
+        String displayStatus = vendingMachine.createSystemDisplay(SUFFICIENT_VALUE_FOR_ANY_PURCHASE, false);
         assertEquals("SOLD OUT", displayStatus);
     }
     
     @Test
     public void displaySoldOutWhenColaPurchaseAttemptedWithColaSoldOut(){
         purchaseProductNumTimes(COLA, NUM_UNITS_INITIALLY_STOCKED + 1);
-        String displayStatus = vendingMachine.createSystemDisplay(SUFFICIENT_VALUE_FOR_ANY_PURCHASE);
+        String displayStatus = vendingMachine.createSystemDisplay(SUFFICIENT_VALUE_FOR_ANY_PURCHASE, false);
         assertEquals("SOLD OUT", displayStatus);
     }
     
@@ -189,7 +189,7 @@ public class VendingMachineTest {
     public void displaySoldOutWhenSoldOutProductPurchaseAttemptedWithInsufficientValue(){
         purchaseProductNumTimes(CHIPS, NUM_UNITS_INITIALLY_STOCKED);
         vendingMachine.attemptProductPurchase(CHIPS, ZERO_VALUE_SYSTEM_BALANCE);
-        String displayStatus = vendingMachine.createSystemDisplay(ZERO_VALUE_SYSTEM_BALANCE);
+        String displayStatus = vendingMachine.createSystemDisplay(ZERO_VALUE_SYSTEM_BALANCE, false);
         assertEquals("SOLD OUT", displayStatus);
     }
     
@@ -197,16 +197,16 @@ public class VendingMachineTest {
     public void displayInsertCoinAfterSoldOutWithZeroSystemBalance(){
         purchaseProductNumTimes(CANDY, NUM_UNITS_INITIALLY_STOCKED);
         vendingMachine.attemptProductPurchase(CANDY, ZERO_VALUE_SYSTEM_BALANCE);
-        vendingMachine.createSystemDisplay(ZERO_VALUE_SYSTEM_BALANCE);
-        String displayStatus = vendingMachine.createSystemDisplay(ZERO_VALUE_SYSTEM_BALANCE);
+        vendingMachine.createSystemDisplay(ZERO_VALUE_SYSTEM_BALANCE, false);
+        String displayStatus = vendingMachine.createSystemDisplay(ZERO_VALUE_SYSTEM_BALANCE, false);
         assertEquals("INSERT COIN", displayStatus);
     }
     
     @Test
     public void displayBalanceAfterSoldOutWithPositiveSystemBalance(){
         purchaseProductNumTimes(COLA, NUM_UNITS_INITIALLY_STOCKED + 1);
-        vendingMachine.createSystemDisplay(SUFFICIENT_VALUE_FOR_ANY_PURCHASE);
-        String displayStatus = vendingMachine.createSystemDisplay(SUFFICIENT_VALUE_FOR_ANY_PURCHASE);
+        vendingMachine.createSystemDisplay(SUFFICIENT_VALUE_FOR_ANY_PURCHASE, false);
+        String displayStatus = vendingMachine.createSystemDisplay(SUFFICIENT_VALUE_FOR_ANY_PURCHASE, false);
         assertEquals("$1.00", displayStatus);
     }
     
@@ -247,6 +247,14 @@ public class VendingMachineTest {
     }
   
     //END Sold Out Functionality Tests
+    
+    //BEGIN Exact Change Only Functionality Tests
+    
+    @Test
+    public void displayExactChangeOnlyWithZeroBalanceInExactChangeOnlyState(){
+        String displayStatus = vendingMachine.createSystemDisplay(ZERO_VALUE_SYSTEM_BALANCE, true);
+        assertEquals("EXACT CHANGE ONLY", displayStatus);
+    }
     
     
     

@@ -35,15 +35,18 @@ public class VendingMachine {
     }
 
     public String checkDisplay() {
-        return createSystemDisplay(coinManager.getSystemBalanceInCents());
+        return createSystemDisplay(coinManager.getSystemBalanceInCents(), false);
     }
 
-    public String createSystemDisplay(int systemBalanceInCents) {
+    public String createSystemDisplay(int systemBalanceInCents, boolean exactChangeOnlyState) {
         if (textWaitingForDisplay != ""){
             return consumeMessageWaitingForDisplay();
         }
         if (systemBalanceInCents > 0){
             return createFormattedCurrencyDisplay(systemBalanceInCents);
+        }
+        if (exactChangeOnlyState){
+            return "EXACT CHANGE ONLY";
         }
         return "INSERT COIN";
     }
