@@ -193,6 +193,15 @@ public class VendingMachineTest {
         assertEquals("SOLD OUT", displayStatus);
     }
     
+    @Test
+    public void displayInsertCoinAfterSoldOutWithZeroSystemBalance(){
+        purchaseProductNumTimes(CANDY, NUM_UNITS_INITIALLY_STOCKED);
+        vendingMachine.attemptProductPurchase(CANDY, ZERO_VALUE_SYSTEM_BALANCE);
+        vendingMachine.createSystemDisplay(ZERO_VALUE_SYSTEM_BALANCE);
+        String displayStatus = vendingMachine.createSystemDisplay(ZERO_VALUE_SYSTEM_BALANCE);
+        assertEquals("INSERT COIN", displayStatus);
+    }
+    
     
     
     
