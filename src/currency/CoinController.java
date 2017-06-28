@@ -72,6 +72,10 @@ public class CoinController {
         return false;
     }
     
+    public boolean systemInExactChangeOnlyState() {
+        return false;
+    }
+    
     public void dispenseChange(int excessPurchaseValueInserted) {
         while (excessPurchaseValueInserted > 0){
             if (excessPurchaseValueInserted >= QUARTER_VALUE_IN_CENTS){
@@ -105,6 +109,8 @@ public class CoinController {
         coinsWaitingToBeReturned.clear();
         return returnedCoins;
     }
+
+
 
     
 

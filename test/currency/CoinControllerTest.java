@@ -204,6 +204,14 @@ public class CoinControllerTest {
     
     //END Return Coins Functionality Tests
     
+    //BEGIN Exact Change Only Functionality Tests
+    
+    @Test
+    public void systemNotInExactChangeOnlyStateWhenInitialized(){
+        boolean exactChangeOnlyState = coinController.systemInExactChangeOnlyState();
+        assertFalse(exactChangeOnlyState);
+    }
+    
     
     
     
