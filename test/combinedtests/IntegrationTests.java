@@ -5,13 +5,17 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 
 import vending.VendingMachine;
 import currency.Coin;
+import vending.Product;
 import static currency.Coin.*;
 import static currency.CoinController.*;
 import static currency.CoinControllerTest.*;
 import static vending.VendingMachine.*;
+import static vending.Product.*;
 
 public class IntegrationTests {
     
@@ -223,10 +227,7 @@ public class IntegrationTests {
     
     @Test
     public void systemDisplaysExactChangeOnlyWithZeroBalanceInExactChangeOnlyState(){
-        for (int i = 0; i < NUM_COINS_INITIALLY_STOCKED; i++){
-            vendingMachine.insert(QUARTER, QUARTER, DIME, DIME);
-            vendingMachine.attemptCandyPurchase();
-        }
+        attemptProductPurchaseNumTimesWithExtraFiveCentsValue(CANDY, NUM_COINS_INITIALLY_STOCKED);
         vendingMachine.checkDisplay();
         String displayStatus = vendingMachine.checkDisplay();
         assertEquals("EXACT CHANGE ONLY", displayStatus);
@@ -234,38 +235,52 @@ public class IntegrationTests {
     
     @Test
     public void systemDisplaysExactChangeOnlyWhenExcessiveNonExactChangeUsedForColaPurchase(){
-        for (int i = 0; i < NUM_COINS_INITIALLY_STOCKED; i++){
-            vendingMachine.insert(QUARTER, QUARTER, DIME, DIME);
-            vendingMachine.attemptCandyPurchase();
-        }
-        vendingMachine.insert(QUARTER, QUARTER, QUARTER, QUARTER, DIME);
-        vendingMachine.attemptColaPurchase();
+        attemptProductPurchaseNumTimesWithExtraFiveCentsValue(CANDY, NUM_COINS_INITIALLY_STOCKED);
+        attemptProductPurchaseNumTimesWithExtraFiveCentsValue(COLA, 1);
         String displayStatus = vendingMachine.checkDisplay();
         assertEquals("EXACT CHANGE ONLY", displayStatus);
     }
     
     @Test
     public void systemDisplaysExactChangeOnlyWhenExcessiveNonExactChangeUsedForChipsPurchase(){
-        for (int i = 0; i < NUM_COINS_INITIALLY_STOCKED; i++){
-            vendingMachine.insert(QUARTER, QUARTER, DIME, DIME);
-            vendingMachine.attemptCandyPurchase();
-        }
-        vendingMachine.insert(QUARTER, DIME, DIME, DIME);
-        vendingMachine.attemptChipsPurchase();
+        attemptProductPurchaseNumTimesWithExtraFiveCentsValue(CANDY, NUM_COINS_INITIALLY_STOCKED);
+        attemptProductPurchaseNumTimesWithExtraFiveCentsValue(CHIPS, 1);
         String displayStatus = vendingMachine.checkDisplay();
         assertEquals("EXACT CHANGE ONLY", displayStatus);
     }
     
     @Test
     public void systemDisplaysExactChangeOnlyWhenExcessiveNonExactChangeUsedForCandyPurchase(){
-        for (int i = 0; i < NUM_COINS_INITIALLY_STOCKED; i++){
-            vendingMachine.insert(QUARTER, DIME, DIME, DIME);
-            vendingMachine.attemptChipsPurchase();
-        }
-        vendingMachine.insert(QUARTER, QUARTER, QUARTER);
-        vendingMachine.attemptCandyPurchase();
+        attemptProductPurchaseNumTimesWithExtraFiveCentsValue(CHIPS, NUM_COINS_INITIALLY_STOCKED);
+        attemptProductPurchaseNumTimesWithExtraFiveCentsValue(CANDY, 1);
         String displayStatus = vendingMachine.checkDisplay();
         assertEquals("EXACT CHANGE ONLY", displayStatus);
+    }
+    
+    
+    
+    
+    private void attemptProductPurchaseNumTimesWithExtraFiveCentsValue(Product selectedProduct, 
+            int numTimesToPurchase){
+        
+        Map<Product, Runnable> productPurchaseMethods = new HashMap<Product, Runnable>();
+        productPurchaseMethods.put(COLA,  () -> vendingMachine.attemptColaPurchase());
+        productPurchaseMethods.put(CHIPS, () -> vendingMachine.attemptChipsPurchase());
+        productPurchaseMethods.put(CANDY, () -> vendingMachine.attemptCandyPurchase());
+        
+        for (int i = 0; i < numTimesToPurchase; i++){
+            insertExtraFiveCentsForProductPurchase(selectedProduct);
+            productPurchaseMethods.get(selectedProduct).run();
+        }
+    }
+    
+    private void insertExtraFiveCentsForProductPurchase(Product selectedProduct){
+        Map<Product, Coin[]> extraFiveCentsForProductPurchase = new HashMap<Product, Coin[]>();
+        extraFiveCentsForProductPurchase.put(CHIPS, new Coin[] {QUARTER, DIME, DIME, DIME});
+        extraFiveCentsForProductPurchase.put(CANDY, new Coin[] {QUARTER, QUARTER, DIME, DIME});
+        extraFiveCentsForProductPurchase.put(COLA, new Coin[] {QUARTER, QUARTER, QUARTER, DIME, DIME, DIME});
+        
+        vendingMachine.insert(extraFiveCentsForProductPurchase.get(selectedProduct));
     }
 
 
