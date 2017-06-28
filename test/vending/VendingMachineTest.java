@@ -228,6 +228,16 @@ public class VendingMachineTest {
         assertTrue(dispensedProducts.isEmpty());
     }
     
+    @Test
+    public void candyNotDispensedWhenSoldOut(){
+        purchaseProductNumTimes(CANDY, NUM_UNITS_INITIALLY_STOCKED);
+        vendingMachine.checkProductReturn();
+        purchaseProductNumTimes(CANDY, 1);
+        List<Product> dispensedProducts = vendingMachine.checkProductReturn();
+        assertTrue(dispensedProducts.isEmpty());
+    }
+    
+    
     
     
     private void purchaseProductNumTimes(Product productToPurchase, int numTimesToPurchase){
