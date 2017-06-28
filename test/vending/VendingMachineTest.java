@@ -185,6 +185,14 @@ public class VendingMachineTest {
         assertEquals("SOLD OUT", displayStatus);
     }
     
+    @Test
+    public void displaySoldOutWhenSoldOutProductPurchaseAttemptedWithInsufficientValue(){
+        purchaseProductNumTimes(CHIPS, NUM_UNITS_INITIALLY_STOCKED);
+        vendingMachine.attemptProductPurchase(CHIPS, ZERO_VALUE_SYSTEM_BALANCE);
+        String displayStatus = vendingMachine.createSystemDisplay(ZERO_VALUE_SYSTEM_BALANCE);
+        assertEquals("SOLD OUT", displayStatus);
+    }
+    
     
     
     

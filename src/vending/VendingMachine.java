@@ -86,17 +86,17 @@ public class VendingMachine {
     }
 
     public void attemptProductPurchase(Product selectedProduct, int systemBalanceInCents) {
-        int productCost = selectedProduct.getCostInCents();
-        if (systemBalanceInCents >= productCost){
-            if (productInStock(selectedProduct)){
+        if (productInStock(selectedProduct)){
+            int productCost = selectedProduct.getCostInCents();
+            if (systemBalanceInCents >= productCost){
                 completeProductPurchase(selectedProduct, systemBalanceInCents);
             }
             else{
-                displayMessage("SOLD OUT");
+                displayMessage("PRICE " + createFormattedCurrencyDisplay(productCost));
             }
         }
         else{
-            displayMessage("PRICE " + createFormattedCurrencyDisplay(productCost));
+            displayMessage("SOLD OUT");
         }
     }
     
