@@ -9,6 +9,7 @@ import java.util.List;
 import vending.VendingMachine;
 import currency.Coin;
 import static currency.Coin.*;
+import static currency.CoinController.*;
 import static currency.CoinControllerTest.*;
 import static vending.VendingMachine.*;
 
@@ -216,7 +217,20 @@ public class IntegrationTests {
         assertEquals("$0.50", displayStatus);
     }
     
-  //END Sold Out Functionality Tests
+    //END Sold Out Functionality Tests
+    
+    //BEGIN Exact Change Only Functionality Tests
+    
+    @Test
+    public void systemDisplaysExactChangeOnlyWithZeroBalanceInExactChangeOnlyState(){
+        for (int i = 0; i < NUM_COINS_INITIALLY_STOCKED; i++){
+            vendingMachine.insert(QUARTER, QUARTER, DIME, DIME);
+            vendingMachine.attemptCandyPurchase();
+        }
+        vendingMachine.checkDisplay();
+        String displayStatus = vendingMachine.checkDisplay();
+        assertEquals("EXACT CHANGE ONLY", displayStatus);
+    }
 
 
 }

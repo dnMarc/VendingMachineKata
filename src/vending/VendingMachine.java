@@ -35,7 +35,8 @@ public class VendingMachine {
     }
 
     public String checkDisplay() {
-        return createSystemDisplay(coinManager.getSystemBalanceInCents(), false);
+        return createSystemDisplay(coinManager.getSystemBalanceInCents(), 
+                    coinManager.systemInExactChangeOnlyState());
     }
 
     public String createSystemDisplay(int systemBalanceInCents, boolean exactChangeOnlyState) {
