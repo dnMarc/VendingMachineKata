@@ -124,7 +124,7 @@ public class VendingMachine {
         dispenseProduct(selectedProduct);
         displayMessage("THANK YOU");
         int excessPurchaseValueInCents = calculateExcessValue(selectedProduct, systemBalanceInCents);
-        coinManager.dispenseChange(excessPurchaseValueInCents);
+        coinManager.processCoinTransactions(excessPurchaseValueInCents);
         coinManager.resetSystemBalanceToZero();
         removeProductFromInventory(selectedProduct);
     }

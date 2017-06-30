@@ -257,6 +257,21 @@ public class IntegrationTests {
         assertEquals("EXACT CHANGE ONLY", displayStatus);
     }
     
+    @Test
+    public void acceptedCoinsAreAddedToCoinInventoryBeforeChangeDispensed(){
+        for (int i = 0; i < NUM_COINS_INITIALLY_STOCKED; i++){  //This depletes all Dimes from
+            vendingMachine.insert(QUARTER, QUARTER, QUARTER);   //Coin inventory
+            vendingMachine.attemptCandyPurchase();
+        }
+        vendingMachine.checkCoinReturn();
+        vendingMachine.insert(QUARTER, QUARTER, DIME);
+        vendingMachine.attemptChipsPurchase();
+        List<Coin> returnedCoins = vendingMachine.checkCoinReturn();
+        assertTrue(coinsReturnedAreAsExpected(returnedCoins, DIME));
+    }
+    
+    //END Exact Change Only Functionality Tests
+    
     
     
     
